@@ -9,3 +9,6 @@ IntellijIdea
 4. mvn clean package
 5. Start up from main class
 6. Test app with postman tests collection in postman package
+- write in the fields of first test Basic Auth username: admin, password: 123
+- close test and save setting
+- run collection

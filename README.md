@@ -7,5 +7,5 @@ IntellijIdea
 2. Unpack zip-файл
 3. Open app in IntellijIdea
 4. mvn clean package
-5. start up from main class
+5. Start up from main class
 6. Test app with postman tests collection in postman package

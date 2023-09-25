@@ -1,7 +1,7 @@
-package com.example.testapi.controller;
-import com.example.testapi.dto.ContactInfoDto;
-import com.example.testapi.dto.NewContactInfoDto;
-import com.example.testapi.service.ContactInfoService;
+package com.example.TestAPI.controller;
+import com.example.TestAPI.dto.ContactInfoDto;
+import com.example.TestAPI.dto.NewContactInfoDto;
+import com.example.TestAPI.service.ContactInfoService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -22,8 +22,8 @@ public class ContactInfoController {
 
     @PostMapping
     public ResponseEntity<ContactInfoDto> postContactInfo(@Valid @RequestBody NewContactInfoDto newContactInfoDto) {
-        log.info("POST: /info");
-        return ResponseEntity.status(201).body(contactInfoService.addContactInfo(newContactInfoDto));
+            log.info("POST: /info");
+            return ResponseEntity.status(201).body(contactInfoService.addContactInfo(newContactInfoDto));
     }
 
     @GetMapping("/{infoId}")
@@ -33,7 +33,7 @@ public class ContactInfoController {
     }
 
     @GetMapping
-    ResponseEntity<List<ContactInfoDto>> getLocations(
+    ResponseEntity<List<ContactInfoDto>> getContactInfos(
             @RequestParam(value = "from", defaultValue = "0")
             @PositiveOrZero Integer from,
             @RequestParam(value = "size", defaultValue = "10")

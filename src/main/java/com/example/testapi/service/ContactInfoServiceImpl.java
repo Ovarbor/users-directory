@@ -1,13 +1,13 @@
-package com.example.testapi.service;
+package com.example.TestAPI.service;
 
-import com.example.testapi.dto.ContactInfoDto;
-import com.example.testapi.dto.NewContactInfoDto;
-import com.example.testapi.exceptions.NotFoundValidationException;
-import com.example.testapi.mapper.ContactInfoMapper;
-import com.example.testapi.model.ContactInfo;
-import com.example.testapi.model.User;
-import com.example.testapi.repo.ContactInfoRepo;
-import com.example.testapi.repo.UserRepo;
+import com.example.TestAPI.dto.ContactInfoDto;
+import com.example.TestAPI.dto.NewContactInfoDto;
+import com.example.TestAPI.exceptions.NotFoundValidationException;
+import com.example.TestAPI.mapper.ContactInfoMapper;
+import com.example.TestAPI.model.ContactInfo;
+import com.example.TestAPI.model.User;
+import com.example.TestAPI.repo.ContactInfoRepo;
+import com.example.TestAPI.repo.UserRepo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;

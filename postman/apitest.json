@@ -1,1233 +1,1264 @@
 {
-  "info": {
-    "_postman_id": "4f622f31-328a-4506-95bd-66359cfbe749",
-    "name": "TestApi - tests",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "_exporter_id": "23073145"
-  },
-  "item": [
-    {
-      "name": "ContactInfoTests",
-      "item": [
-        {
-          "name": "Добавление контактных данных",
-          "event": [
-            {
-              "listen": "prerequest",
-              "script": {
-                "exec": [
-                  "const main = async () => {\r",
-                  "    const api = new API(pm);\r",
-                  "    const rnd = new RandomUtils();\r",
-                  "\r",
-                  "    let contactInfo;\r",
-                  "    try {\r",
-                  "        const user = await api.addUser(rnd.getUser());\r",
-                  "        contactInfo = rnd.getContactInfo(user.id);\r",
-                  "    } catch(err) {\r",
-                  "        console.error(\"Ошибка при подготовке тестовых данных.\", err);\r",
-                  "    }\r",
-                  "\r",
-                  "    pm.request.body.update({\r",
-                  "        mode: 'raw',\r",
-                  "        raw: JSON.stringify(contactInfo),\r",
-                  "        options: { raw: { language: 'json' } }\r",
-                  "    });\r",
-                  "};\r",
-                  "\r",
-                  "const interval = setInterval(() => {}, 1000);\r",
-                  "\r",
-                  "setTimeout(async () => \r",
-                  "    {\r",
-                  "        try {\r",
-                  "            await main();\r",
-                  "        } catch (e) {\r",
-                  "            console.error(e);\r",
-                  "        } finally {\r",
-                  "            clearInterval(interval);\r",
-                  "        }\r",
-                  "    },  \r",
-                  "    100 \r",
-                  ");"
-                ],
-                "type": "text/javascript"
-              }
-            },
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "pm.test(\"Ответ должен содержать код статуса 201 и данные в формате json\", function () {\r",
-                  "    pm.response.to.be.status(201);    \r",
-                  "    pm.response.to.be.withBody;\r",
-                  "    pm.response.to.be.json;\r",
-                  "});\r",
-                  "\r",
-                  "const source = JSON.parse(pm.request.body.raw);\r",
-                  "const target = pm.response.json();\r",
-                  "\r",
-                  "pm.test(\"Контактные данные должны содержать поля: id, email, phone, user\", function () {\r",
-                  "pm.expect(target).to.have.property('id');\r",
-                  "pm.expect(target).to.have.property('email');\r",
-                  "pm.expect(target).to.have.property('phone');\r",
-                  "pm.expect(target).to.have.property('user');\r",
-                  "});\r",
-                  "\r",
-                  "pm.test(\"Данные в ответе должны соответствовать данным в запросе\", function () {\r",
-                  "    pm.expect(target.id).to.not.be.null;\r",
-                  "    pm.expect(source.email).equal(target.email, 'email должен совпадать с отправленным');\r",
-                  "    pm.expect(source.phone).equal(target.phone, 'телефон должен совпадать с отправленным');\r",
-                  "});"
-                ],
-                "type": "text/javascript"
-              }
-            }
-          ],
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{{request_body}}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "{{baseUrl}}/info",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "info"
-              ]
-            },
-            "description": ""
-          },
-          "response": []
-        },
-        {
-          "name": "Изменение контактной информации",
-          "event": [
-            {
-              "listen": "prerequest",
-              "script": {
-                "exec": [
-                  "const main = async () => {\r",
-                  "    const api = new API(pm);\r",
-                  "    const rnd = new RandomUtils();\r",
-                  "    let contactInfo\r",
-                  "    try {\r",
-                  "        const user = await api.addUser(rnd.getUser());\r",
-                  "        contactInfo = await api.addContactInfo(rnd.getContactInfo(user.id));\r",
-                  "    } catch(err) {\r",
-                  "        console.error(\"Ошибка при подготовке тестовых данных.\", err);\r",
-                  "    }\r",
-                  "    pm.collectionVariables.set(\"infoid\", Number(contactInfo.id))\r",
-                  "    pm.request.body.update({\r",
-                  "        mode: 'raw',\r",
-                  "        raw: JSON.stringify({\r",
-                  "            phone : rnd.getContactInfo().phone,\r",
-                  "            email : rnd.getContactInfo().email,\r",
-                  "        }),\r",
-                  "        options: { raw: { language: 'json' } }\r",
-                  "    });\r",
-                  "};\r",
-                  "\r",
-                  "const interval = setInterval(() => {}, 1000);\r",
-                  "\r",
-                  "setTimeout(async () => \r",
-                  "    {\r",
-                  "        try {\r",
-                  "            await main();\r",
-                  "        } catch (e) {\r",
-                  "            console.error(e);\r",
-                  "        } finally {\r",
-                  "            clearInterval(interval);\r",
-                  "        }\r",
-                  "    },  \r",
-                  "    100 \r",
-                  ");"
-                ],
-                "type": "text/javascript"
-              }
-            },
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "pm.test(\"Ответ должен содержать код статуса 200 и данные в формате json\", function () {\r",
-                  "    pm.response.to.be.ok;    \r",
-                  "    pm.response.to.be.withBody;\r",
-                  "    pm.response.to.be.json;\r",
-                  "});\r",
-                  "\r",
-                  "const source = JSON.parse(pm.request.body.raw);\r",
-                  "const target = pm.response.json();\r",
-                  "\r",
-                  "pm.test(\"Контактная информация должна содержать поля: id, phone, email, user\", function () {\r",
-                  "pm.expect(target).to.have.property('id');\r",
-                  "pm.expect(target).to.have.property('phone');\r",
-                  "pm.expect(target).to.have.property('email');\r",
-                  "pm.expect(target).to.have.property('user');\r",
-                  "});\r",
-                  "\r",
-                  "pm.test(\"Данные в ответе должны соответствовать данным в запросе\", function () {\r",
-                  "    pm.expect(target.id).to.not.be.null;\r",
-                  "    pm.expect(source.email).equal(target.email, 'Email должен совпадать с отправленным');\r",
-                  "    pm.expect(source.phone).equal(target.phone, 'Телефон должен совпадать с отправленным');\r",
-                  "});"
-                ],
-                "type": "text/javascript"
-              }
-            }
-          ],
-          "request": {
-            "method": "PATCH",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{{request_body}}"
-            },
-            "url": {
-              "raw": "{{baseUrl}}/info/:infoId",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "info",
-                ":infoid"
-              ],
-              "variable": [
-                {
-                  "key": "infoid",
-                  "value": "{{infoid}}"
-                }
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "Удаление контактной информации",
-          "event": [
-            {
-              "listen": "prerequest",
-              "script": {
-                "exec": [
-                  "const main = async () => {\r",
-                  "    const api = new API(pm);\r",
-                  "    const rnd = new RandomUtils();\r",
-                  "\r",
-                  "    try {\r",
-                  "        const user = await api.addUser(rnd.getUser());\r",
-                  "        const contactInfo = await api.addContactInfo(rnd.getContactInfo(user.id));\r",
-                  "        const findedContactInfo = await api.findContactInfo(contactInfo.id);\r",
-                  "        pm.collectionVariables.set(\"infoid\", contactInfo.id)\r",
-                  "        pm.collectionVariables.set(\"response\", findedContactInfo)\r",
-                  "    } catch(err) {\r",
-                  "        console.error(\"Ошибка при подготовке тестовых данных.\", err);\r",
-                  "    }\r",
-                  "};\r",
-                  "\r",
-                  "const interval = setInterval(() => {}, 1000);\r",
-                  "\r",
-                  "setTimeout(async () => \r",
-                  "    {\r",
-                  "        try {\r",
-                  "            await main();\r",
-                  "        } catch (e) {\r",
-                  "            console.error(e);\r",
-                  "        } finally {\r",
-                  "            clearInterval(interval);\r",
-                  "        }\r",
-                  "    },  \r",
-                  "    100 \r",
-                  ");"
-                ],
-                "type": "text/javascript"
-              }
-            },
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "pm.test(\"Ответ должен содержать код статуса 204\", function () {\r",
-                  "    pm.response.to.have.status(204);\r",
-                  "});\r",
-                  "\r",
-                  "source = pm.collectionVariables.get('response');\r",
-                  "infoId = pm.collectionVariables.get('infoid');\r",
-                  "\r",
-                  "pm.test(\"Контактная информация должна быть найдена до удаления\", function () {\r",
-                  "    pm.expect(source.id).equal(infoId, 'Идентификатор контактной информации должен совпадать с удаляемым');\r",
-                  "});\r",
-                  "\r",
-                  "pm.sendRequest({\r",
-                  "            url: pm.collectionVariables.get(\"baseUrl\") + \"/info/\" + infoId,\r",
-                  "            method: 'GET',\r",
-                  "        }, (error, response) => {\r",
-                  "            pm.test(\"Контактная информация не должна быть найдена после удаления\", function () {\r",
-                  "                pm.expect(response.code).to.eql(404);\r",
-                  "            });\r",
-                  "        });"
-                ],
-                "type": "text/javascript"
-              }
-            }
-          ],
-          "request": {
-            "method": "DELETE",
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/info/:locId",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "info",
-                ":infoId"
-              ],
-              "variable": [
-                {
-                  "key": "infoId",
-                  "value": "{{infoid}}"
-                }
-              ]
-            },
-            "response": []
-          }
-        },
-        {
-          "name": "Получение контактной информации по id",
-          "event": [
-            {
-              "listen": "prerequest",
-              "script": {
-                "exec": [
-                  "const main = async () => {\r",
-                  "    const api = new API(pm);\r",
-                  "    const rnd = new RandomUtils();\r",
-                  "\r",
-                  "    try {\r",
-                  "        const user = await api.addUser(rnd.getUser());\r",
-                  "        const contactInfo = await api.addContactInfo(rnd.getContactInfo(user.id));\r",
-                  "        pm.collectionVariables.set(\"response\", contactInfo)\r",
-                  "        pm.collectionVariables.set(\"infoid\", contactInfo.id)\r",
-                  "    } catch(err) {\r",
-                  "        console.error(\"Ошибка при подготовке тестовых данных.\", err);\r",
-                  "    }\r",
-                  "};\r",
-                  "\r",
-                  "const interval = setInterval(() => {}, 1000);\r",
-                  "\r",
-                  "setTimeout(async () => \r",
-                  "    {\r",
-                  "        try {\r",
-                  "            await main();\r",
-                  "        } catch (e) {\r",
-                  "            console.error(e);\r",
-                  "        } finally {\r",
-                  "            clearInterval(interval);\r",
-                  "        }\r",
-                  "    },  \r",
-                  "    100 \r",
-                  ");"
-                ],
-                "type": "text/javascript"
-              }
-            },
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "pm.test(\"Ответ должен содержать код статуса 200 и данные в формате json\", function () {\r",
-                  "    pm.response.to.be.ok;    \r",
-                  "    pm.response.to.be.withBody;\r",
-                  "    pm.response.to.be.json;\r",
-                  "});\r",
-                  "\r",
-                  "const source = pm.collectionVariables.get('response');\r",
-                  "const target = pm.response.json();\r",
-                  "\r",
-                  "pm.test(\"Контактная информация должна содержать поля: id, email, phone, user\", function () {\r",
-                  "pm.expect(target).to.have.property('id');\r",
-                  "pm.expect(target).to.have.property('email');\r",
-                  "pm.expect(target).to.have.property('phone');\r",
-                  "pm.expect(target).to.have.property('user');\r",
-                  "});\r",
-                  "\r",
-                  "pm.test(\"Данные в ответе должны соответствовать данным в запросе\", function () {\r",
-                  "    pm.expect(source.id).equal(target.id, 'Идентификатор локации должен соответствовать идентификатору в запросе');\r",
-                  "    pm.expect(source.email).equal(target.email, 'Email должен совпадать с отправленным');\r",
-                  "    pm.expect(source.phone).equal(target.phone, 'Телефон должен совпадать с отправленным');\r",
-                  "});"
-                ],
-                "type": "text/javascript"
-              }
-            }
-          ],
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/info/:infoId",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "info",
-                ":infoId"
-              ],
-              "variable": [
-                {
-                  "key": "infoId",
-                  "value": "{{infoid}}",
-                  "description": "(Required) id"
-                }
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "Получение всех контактных данных",
-          "event": [
-            {
-              "listen": "prerequest",
-              "script": {
-                "exec": [
-                  "const main = async () => {\r",
-                  "    const api = new API(pm);\r",
-                  "    const rnd = new RandomUtils();\r",
-                  "\r",
-                  "    try {\r",
-                  "        const user = await api.addUser(rnd.getUser());\r",
-                  "        const contactInfo = await api.addContactInfo(rnd.getContactInfo(user.id));\r",
-                  "        pm.collectionVariables.set(\"response\", contactInfo)\r",
-                  "    } catch(err) {\r",
-                  "        console.error(\"Ошибка при подготовке тестовых данных.\", err);\r",
-                  "    }\r",
-                  "};\r",
-                  "\r",
-                  "const interval = setInterval(() => {}, 1000);\r",
-                  "\r",
-                  "setTimeout(async () => \r",
-                  "    {\r",
-                  "        try {\r",
-                  "            await main();\r",
-                  "        } catch (e) {\r",
-                  "            console.error(e);\r",
-                  "        } finally {\r",
-                  "            clearInterval(interval);\r",
-                  "        }\r",
-                  "    },  \r",
-                  "    100 \r",
-                  ");"
-                ],
-                "type": "text/javascript"
-              }
-            },
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "pm.test(\"Ответ должен содержать код статуса 200 и данные в формате json\", function () {\r",
-                  "    pm.response.to.be.ok;    \r",
-                  "    pm.response.to.be.withBody;\r",
-                  "    pm.response.to.be.json;\r",
-                  "});\r",
-                  "\r",
-                  "const source = pm.collectionVariables.get('response');\r",
-                  "const target = pm.response.json();\r",
-                  "let founded;\r",
-                  "target.forEach(function(element){if (element.id == source.id) founded = element});\r",
-                  "\r",
-                  "pm.test(\"Контактная информация должна содержать поля: id, email, phone, user\", function () {\r",
-                  "pm.expect(target[0]).to.have.property('id');\r",
-                  "pm.expect(target[0]).to.have.property('email');\r",
-                  "pm.expect(target[0]).to.have.property('phone');\r",
-                  "pm.expect(target[0]).to.have.property('user');\r",
-                  "});\r",
-                  "\r",
-                  "pm.test(\"Данные в ответе должны соответствовать данным в запросе\", function () {\r",
-                  "    pm.expect(source.id).equal(founded.id, 'Идентификатор контактной информации должен соответствовать идентификатору добавленному ранее');\r",
-                  "    pm.expect(source.email).equal(founded.email, 'Email должен соответствовать email добавленному ранее');\r",
-                  "    pm.expect(source.phone).equal(founded.phone, 'Телефон должнен соответствовать телефону добавленному ранее');\r",
-                  "});"
-                ],
-                "type": "text/javascript"
-              }
-            }
-          ],
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/info?from=0&size=1000",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "info"
-              ],
-              "query": [
-                {
-                  "key": "from",
-                  "value": "0",
-                  "description": "смещение страницы"
-                },
-                {
-                  "key": "size",
-                  "value": "1000",
-                  "description": "количество"
-                }
-              ]
-            }
-          },
-          "response": []
-        }
-      ]
-    },
-    {
-      "name": "UserTests",
-      "item": [
-        {
-          "name": "Добавление пользователя",
-          "event": [
-            {
-              "listen": "prerequest",
-              "script": {
-                "exec": [
-                  "const main = async () => {\r",
-                  "    const api = new API(pm);\r",
-                  "    const rnd = new RandomUtils();\r",
-                  "\r",
-                  "    let user;\r",
-                  "    try {\r",
-                  "         user = rnd.getUser();\r",
-                  "    } catch(err) {\r",
-                  "        console.error(\"Ошибка при подготовке тестовых данных.\", err);\r",
-                  "    }\r",
-                  "\r",
-                  "    pm.request.body.update({\r",
-                  "        mode: 'raw',\r",
-                  "        raw: JSON.stringify(user),\r",
-                  "        options: { raw: { language: 'json' } }\r",
-                  "    });\r",
-                  "};\r",
-                  "\r",
-                  "const interval = setInterval(() => {}, 1000);\r",
-                  "\r",
-                  "setTimeout(async () => \r",
-                  "    {\r",
-                  "        try {\r",
-                  "            await main();\r",
-                  "        } catch (e) {\r",
-                  "            console.error(e);\r",
-                  "        } finally {\r",
-                  "            clearInterval(interval);\r",
-                  "        }\r",
-                  "    },  \r",
-                  "    100 \r",
-                  ");"
-                ],
-                "type": "text/javascript"
-              }
-            },
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "pm.test(\"Ответ должен содержать код статуса 201 и данные в формате json\", function () {\r",
-                  "    pm.response.to.be.status(201);    \r",
-                  "    pm.response.to.be.withBody;\r",
-                  "    pm.response.to.be.json;\r",
-                  "});\r",
-                  "\r",
-                  "const source = JSON.parse(pm.request.body.raw);\r",
-                  "const target = pm.response.json();\r",
-                  "\r",
-                  "pm.test(\"Пользователь должны содержать поля: id, name, lastName, surName, birthday\", function () {\r",
-                  "pm.expect(target).to.have.property('id');\r",
-                  "pm.expect(target).to.have.property('name');\r",
-                  "pm.expect(target).to.have.property('lastName');\r",
-                  "pm.expect(target).to.have.property('surName');\r",
-                  "pm.expect(target).to.have.property('birthday');\r",
-                  "});\r",
-                  "\r",
-                  "pm.test(\"Данные в ответе должны соответствовать данным в запросе\", function () {\r",
-                  "    pm.expect(target.id).to.not.be.null;\r",
-                  "    pm.expect(source.name).equal(target.name, 'имя должно совпадать с отправленным');\r",
-                  "    pm.expect(source.lastName).equal(target.lastName, 'фамилия должен совпадать с отправленным');\r",
-                  "    pm.expect(source.surName).equal(target.surName, 'отчетство должно совпадать с отправленным');\r",
-                  "    pm.expect(source.birthday).equal(target.birthday, 'дата должна совпадать с отправленной');\r",
-                  "});"
-                ],
-                "type": "text/javascript"
-              }
-            }
-          ],
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{{request_body}}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "{{baseUrl}}/users",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "users"
-              ]
-            },
-            "description": ""
-          },
-          "response": []
-        },
-        {
-          "name": "Изменение пользователя",
-          "event": [
-            {
-              "listen": "prerequest",
-              "script": {
-                "exec": [
-                  "const main = async () => {\r",
-                  "    const api = new API(pm);\r",
-                  "    const rnd = new RandomUtils();\r",
-                  "    let user\r",
-                  "    try {\r",
-                  "        user = await api.addUser(rnd.getUser());\r",
-                  "    } catch(err) {\r",
-                  "        console.error(\"Ошибка при подготовке тестовых данных.\", err);\r",
-                  "    }\r",
-                  "    pm.collectionVariables.set(\"userid\", Number(user.id))\r",
-                  "    pm.request.body.update({\r",
-                  "        mode: 'raw',\r",
-                  "        raw: JSON.stringify({\r",
-                  "            name : rnd.getUser().name,\r",
-                  "            lastName : rnd.getUser().lastName,\r",
-                  "            surName : rnd.getUser().surName,\r",
-                  "            birthday : rnd.getUser().birthday\r",
-                  "        }),\r",
-                  "        options: { raw: { language: 'json' } }\r",
-                  "    });\r",
-                  "};\r",
-                  "\r",
-                  "const interval = setInterval(() => {}, 1000);\r",
-                  "\r",
-                  "setTimeout(async () => \r",
-                  "    {\r",
-                  "        try {\r",
-                  "            await main();\r",
-                  "        } catch (e) {\r",
-                  "            console.error(e);\r",
-                  "        } finally {\r",
-                  "            clearInterval(interval);\r",
-                  "        }\r",
-                  "    },  \r",
-                  "    100 \r",
-                  ");"
-                ],
-                "type": "text/javascript"
-              }
-            },
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "pm.test(\"Ответ должен содержать код статуса 200 и данные в формате json\", function () {\r",
-                  "    pm.response.to.be.ok;    \r",
-                  "    pm.response.to.be.withBody;\r",
-                  "    pm.response.to.be.json;\r",
-                  "});\r",
-                  "\r",
-                  "const source = JSON.parse(pm.request.body.raw);\r",
-                  "const target = pm.response.json();\r",
-                  "\r",
-                  "pm.test(\"Пользователь должен содержать поля: id, name, lastName, surName, birthday\", function () {\r",
-                  "pm.expect(target).to.have.property('id');\r",
-                  "pm.expect(target).to.have.property('name');\r",
-                  "pm.expect(target).to.have.property('lastName');\r",
-                  "pm.expect(target).to.have.property('surName');\r",
-                  "pm.expect(target).to.have.property('birthday');\r",
-                  "});\r",
-                  "\r",
-                  "pm.test(\"Данные в ответе должны соответствовать данным в запросе\", function () {\r",
-                  "    pm.expect(target.id).to.not.be.null;\r",
-                  "    pm.expect(source.name).equal(target.name, 'Имя должно совпадать с отправленным');\r",
-                  "    pm.expect(source.lastName).equal(target.lastName, 'Фамилия должна совпадать с отправленной');\r",
-                  "    pm.expect(source.surName).equal(target.surName, 'Отчество должно совпадать с отправленным');\r",
-                  "    pm.expect(target.birthday).equal(target.birthday, 'Дата должна совпадать с отправленной');\r",
-                  "});"
-                ],
-                "type": "text/javascript"
-              }
-            }
-          ],
-          "request": {
-            "method": "PATCH",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{{request_body}}"
-            },
-            "url": {
-              "raw": "{{baseUrl}}/users/:userId",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "users",
-                ":userid"
-              ],
-              "variable": [
-                {
-                  "key": "userid",
-                  "value": "{{userid}}"
-                }
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "Удаление пользователя",
-          "event": [
-            {
-              "listen": "prerequest",
-              "script": {
-                "exec": [
-                  "const main = async () => {\r",
-                  "    const api = new API(pm);\r",
-                  "    const rnd = new RandomUtils();\r",
-                  "\r",
-                  "    try {\r",
-                  "        const user = await api.addUser(rnd.getUser());\r",
-                  "        const findedUser = await api.findUser(user.id);\r",
-                  "        pm.collectionVariables.set(\"userid\", user.id)\r",
-                  "        pm.collectionVariables.set(\"response\", findedUser)\r",
-                  "    } catch(err) {\r",
-                  "        console.error(\"Ошибка при подготовке тестовых данных.\", err);\r",
-                  "    }\r",
-                  "};\r",
-                  "\r",
-                  "const interval = setInterval(() => {}, 1000);\r",
-                  "\r",
-                  "setTimeout(async () => \r",
-                  "    {\r",
-                  "        try {\r",
-                  "            await main();\r",
-                  "        } catch (e) {\r",
-                  "            console.error(e);\r",
-                  "        } finally {\r",
-                  "            clearInterval(interval);\r",
-                  "        }\r",
-                  "    },  \r",
-                  "    100 \r",
-                  ");"
-                ],
-                "type": "text/javascript"
-              }
-            },
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "pm.test(\"Ответ должен содержать код статуса 204\", function () {\r",
-                  "    pm.response.to.have.status(204);\r",
-                  "});\r",
-                  "\r",
-                  "source = pm.collectionVariables.get('response');\r",
-                  "userId = pm.collectionVariables.get('userid');\r",
-                  "\r",
-                  "pm.test(\"Контактная информация должна быть найдена до удаления\", function () {\r",
-                  "    pm.expect(source.id).equal(userId, 'Идентификатор пользователя должен совпадать с удаляемым');\r",
-                  "});\r",
-                  "\r",
-                  "pm.sendRequest({\r",
-                  "            url: pm.collectionVariables.get(\"baseUrl\") + \"/users/\" + userId,\r",
-                  "            method: 'GET',\r",
-                  "        }, (error, response) => {\r",
-                  "            pm.test(\"Пользователь не должен быть найден после удаления\", function () {\r",
-                  "                pm.expect(response.code).to.eql(404);\r",
-                  "            });\r",
-                  "        });"
-                ],
-                "type": "text/javascript"
-              }
-            }
-          ],
-          "request": {
-            "method": "DELETE",
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/users/:userId",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "users",
-                ":userId"
-              ],
-              "variable": [
-                {
-                  "key": "userId",
-                  "value": "{{userid}}"
-                }
-              ]
-            },
-            "response": []
-          }
-        },
-        {
-          "name": "Получение пользователя по id",
-          "event": [
-            {
-              "listen": "prerequest",
-              "script": {
-                "exec": [
-                  "const main = async () => {\r",
-                  "    const api = new API(pm);\r",
-                  "    const rnd = new RandomUtils();\r",
-                  "\r",
-                  "    try {\r",
-                  "        const user = await api.addUser(rnd.getUser());\r",
-                  "        pm.collectionVariables.set(\"response\", user)\r",
-                  "        pm.collectionVariables.set(\"userid\", user.id)\r",
-                  "    } catch(err) {\r",
-                  "        console.error(\"Ошибка при подготовке тестовых данных.\", err);\r",
-                  "    }\r",
-                  "};\r",
-                  "\r",
-                  "const interval = setInterval(() => {}, 1000);\r",
-                  "\r",
-                  "setTimeout(async () => \r",
-                  "    {\r",
-                  "        try {\r",
-                  "            await main();\r",
-                  "        } catch (e) {\r",
-                  "            console.error(e);\r",
-                  "        } finally {\r",
-                  "            clearInterval(interval);\r",
-                  "        }\r",
-                  "    },  \r",
-                  "    100 \r",
-                  ");"
-                ],
-                "type": "text/javascript"
-              }
-            },
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "pm.test(\"Ответ должен содержать код статуса 200 и данные в формате json\", function () {\r",
-                  "    pm.response.to.be.ok;    \r",
-                  "    pm.response.to.be.withBody;\r",
-                  "    pm.response.to.be.json;\r",
-                  "});\r",
-                  "\r",
-                  "const source = pm.collectionVariables.get('response');\r",
-                  "const target = pm.response.json();\r",
-                  "\r",
-                  "pm.test(\"Пользователь должен содержать поля: id, name, lastName, surName, birthday\", function () {\r",
-                  "pm.expect(target).to.have.property('id');\r",
-                  "pm.expect(target).to.have.property('name');\r",
-                  "pm.expect(target).to.have.property('lastName');\r",
-                  "pm.expect(target).to.have.property('surName');\r",
-                  "pm.expect(target).to.have.property('birthday');\r",
-                  "});\r",
-                  "\r",
-                  "pm.test(\"Данные в ответе должны соответствовать данным в запросе\", function () {\r",
-                  "    pm.expect(source.id).equal(target.id, 'Идентификатор пользователя должен соответствовать идентификатору в запросе');\r",
-                  "    pm.expect(source.name).equal(target.name, 'Имя должно совпадать с отправленным');\r",
-                  "    pm.expect(source.lastName).equal(target.lastName, 'Фамилия должна совпадать с отправленной');\r",
-                  "    pm.expect(source.surName).equal(target.surName, 'Отчество должно совпадать с отправленным');\r",
-                  "    pm.expect(source.birthday).equal(target.birthday, 'Дата должна совпадать с отправленной');\r",
-                  "});"
-                ],
-                "type": "text/javascript"
-              }
-            }
-          ],
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/users/:userId",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "users",
-                ":userId"
-              ],
-              "variable": [
-                {
-                  "key": "userId",
-                  "value": "{{userid}}",
-                  "description": "(Required) id"
-                }
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "Получение всех пользователей",
-          "event": [
-            {
-              "listen": "prerequest",
-              "script": {
-                "exec": [
-                  "const main = async () => {\r",
-                  "    const api = new API(pm);\r",
-                  "    const rnd = new RandomUtils();\r",
-                  "\r",
-                  "    try {\r",
-                  "        const user = await api.addUser(rnd.getUser());\r",
-                  "        pm.collectionVariables.set(\"response\", user)\r",
-                  "    } catch(err) {\r",
-                  "        console.error(\"Ошибка при подготовке тестовых данных.\", err);\r",
-                  "    }\r",
-                  "};\r",
-                  "\r",
-                  "const interval = setInterval(() => {}, 1000);\r",
-                  "\r",
-                  "setTimeout(async () => \r",
-                  "    {\r",
-                  "        try {\r",
-                  "            await main();\r",
-                  "        } catch (e) {\r",
-                  "            console.error(e);\r",
-                  "        } finally {\r",
-                  "            clearInterval(interval);\r",
-                  "        }\r",
-                  "    },  \r",
-                  "    100 \r",
-                  ");"
-                ],
-                "type": "text/javascript"
-              }
-            },
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "pm.test(\"Ответ должен содержать код статуса 200 и данные в формате json\", function () {\r",
-                  "    pm.response.to.be.ok;    \r",
-                  "    pm.response.to.be.withBody;\r",
-                  "    pm.response.to.be.json;\r",
-                  "});\r",
-                  "\r",
-                  "const source = pm.collectionVariables.get('response');\r",
-                  "const target = pm.response.json();\r",
-                  "let founded;\r",
-                  "target.forEach(function(element){if (element.id == source.id) founded = element});\r",
-                  "\r",
-                  "pm.test(\"Пользователь должен содержать поля: id, name, lastName, surName, birthday\", function () {\r",
-                  "pm.expect(target[0]).to.have.property('id');\r",
-                  "pm.expect(target[0]).to.have.property('name');\r",
-                  "pm.expect(target[0]).to.have.property('lastName');\r",
-                  "pm.expect(target[0]).to.have.property('surName');\r",
-                  "pm.expect(target[0]).to.have.property('birthday');\r",
-                  "});\r",
-                  "\r",
-                  "pm.test(\"Данные в ответе должны соответствовать данным в запросе\", function () {\r",
-                  "    pm.expect(source.id).equal(founded.id, 'Идентификатор пользователя должен соответствовать идентификатору добавленному ранее');\r",
-                  "    pm.expect(source.name).equal(founded.name, 'Имя должно соответствовать имени добавленному ранее');\r",
-                  "    pm.expect(source.lastName).equal(founded.lastName, 'Фамилия должна соответствовать фамилии добавленной ранее');\r",
-                  "    pm.expect(source.surName).equal(founded.surName, 'Отчество должно соответствовать отчеству добавленному ранее');\r",
-                  "    pm.expect(source.birthday).equal(founded.birthday, 'Дата рождения должна соответствовать добавленной ранее');\r",
-                  "});"
-                ],
-                "type": "text/javascript"
-              }
-            }
-          ],
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "{{baseUrl}}/users?from=0&size=1000",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "users"
-              ],
-              "query": [
-                {
-                  "key": "from",
-                  "value": "0",
-                  "description": "смещение страницы"
-                },
-                {
-                  "key": "size",
-                  "value": "1000",
-                  "description": "количество"
-                }
-              ]
-            }
-          },
-          "response": []
-        }
-      ]
-    }
-  ],
-"event": [
-{
-"listen": "prerequest",
-"script": {
-"type": "text/javascript",
-"exec": [
-"API = class {",
-"    constructor(postman, verbose = false, baseUrl = \"http://localhost:8080\") {",
-"        this.baseUrl = baseUrl;",
-"        this.pm = postman;",
-"        this._verbose = verbose;",
-"    }",
-"",
-"    async addUser(user, verbose=null) {",
-"        return this.post(\"/users\", user, \"Ошибка при добавлении нового пользователя: \", verbose);",
-"    }",
-"",
-"    async addContactInfo(contactInfo, verbose=null) {",
-"    return this.post(\"/info\", contactInfo, \"Ошибка при добавлении контактной информации: \", verbose);",
-"    }",
-"",
-"    async findUser(userId, verbose=null) {",
-"        return this.get('/users/' + userId, null, \"Ошибка при поиске пользователя по id\", verbose);",
-"    }",
-"",
-"    async findContactInfo(infoId, verbose=null) {",
-"        return this.get('/info/' + infoId, null, \"Ошибка при поиске контактных данных по id\", verbose);",
-"    }",
-"",
-"    async post(path, body, errorText = \"Ошибка при выполнении post-запроса: \", verbose=null) {",
-"        return this.sendRequest(\"POST\", path, body, errorText, verbose);",
-"    }",
-"",
-"    async patch(path, body = null, errorText = \"Ошибка при выполнении patch-запроса: \", verbose=null) {",
-"        return this.sendRequest(\"PATCH\", path, body, errorText, verbose);",
-"    }",
-"",
-"    async get(path, body = null, errorText = \"Ошибка при выполнении get-запроса: \", verbose=null) {",
-"        return this.sendRequest(\"GET\", path, body, errorText, verbose);",
-"    }",
-"",
-"    async sendRequest(method, path, body=null, errorText = \"Ошибка при выполнении запроса: \", verbose=null) {",
-"        return new Promise((resolve, reject) => {",
-"            verbose = verbose == null ? this._verbose : verbose;",
-"",
-"            const request = {",
-"                url: this.baseUrl + path,",
-"                method: method,",
-"                body: body == null ? \"\" : JSON.stringify(body),",
-"                header: { \"Content-Type\": \"application/json\" },",
-"            };",
-"",
-"            if(verbose) {",
-"                console.log(\"Отправляю запрос: \", request);",
-"            }",
-"",
-"            try {",
-"                this.pm.sendRequest(request, (error, response) => {",
-"                    if(error || (response.code >= 400 && response.code <= 599)) {",
-"                        let err = error ? error : JSON.stringify(response.json());",
-"                        console.error(\"При выполнении запроса к серверу возникла ошика.\\n\", err,",
-"                             \"\\nДля отладки проблемы повторите такой же запрос к вашей программе \" + ",
-"                             \"на локальном компьютере. Данные запроса:\\n\", JSON.stringify(request));",
-"",
-"                        reject(new Error(errorText + err));",
-"                    }",
-"",
-"                    if(verbose) {",
-"                        console.log(\"Результат обработки запроса: код состояния - \", response.code, \", тело: \", response.json());",
-"                    }",
-"",
-"                    resolve(response.json());",
-"                });",
-"            } catch(err) {",
-"                if(verbose) {",
-"                    console.error(errorText, err);",
-"                }",
-"                return Promise.reject(err);",
-"            }",
-"        });",
-"    }",
-"};",
-"",
-"RandomUtils = class {",
-"    constructor() {}",
-"",
-"    getUser() {",
-"        return {",
-"            name: pm.variables.replaceIn('{{$randomFirstName}}'),",
-"            lastName: pm.variables.replaceIn('{{$randomLastName}}'),",
-"            surName: pm.variables.replaceIn('{{$randomFirstName}}'),",
-"            birthday: this.getDateTime()",
-"        };",
-"    }",
-"",
-"    getContactInfo(userId) {",
-"        return {",
-"            email: pm.variables.replaceIn('{{$randomEmail}}'),",
-"            user: userId,",
-"            phone: pm.variables.replaceIn('{{$randomPhoneNumber}}')",
-"        };",
-"    }",
-"",
-"    getDateTime() {",
-"        const moment = require('moment');",
-"        let pastDate = pm.variables.replaceIn('{{$randomDatePast}}');",
-"        pastDate = moment(pastDate).subtract(20, 'years').format((\"YYYY-MM-DD\"));",
-"        return pastDate;",
-"    }",
-"}"
-]
-}
-},
-{
-"listen": "test",
-"script": {
-"type": "text/javascript",
-"exec": [
-""
-]
-}
-}
-],
-"variable": [
-{
-"key": "baseUrl",
-"value": "http://localhost:8080",
-"type": "string"
-},
-{
-"key": "name",
-"value": ""
-},
-{
-"key": "usersCount",
-"value": 1,
-"type": "number"
-},
-{
-"key": "catid",
-"value": 1,
-"type": "number"
-},
-{
-"key": "request_body",
-"value": ""
-},
-{
-"key": "mail",
-"value": ""
-},
-{
-"key": "response",
-"value": ""
-},
-{
-"key": "uid",
-"value": 1,
-"type": "number"
-},
-{
-"key": "catname",
-"value": ""
-},
-{
-"key": "eid",
-"value": 1,
-"type": "number"
-},
-{
-"key": "compid",
-"value": 1,
-"type": "number"
-},
-{
-"key": "toCheck",
-"value": ""
-},
-{
-"key": "newDataToSet",
-"value": ""
-},
-{
-"key": "uid1",
-"value": ""
-},
-{
-"key": "reqid",
-"value": 1,
-"type": "number"
-},
-{
-"key": "catId",
-"value": ""
-}
-]
+	"info": {
+		"_postman_id": "9a502a67-faea-45b5-956c-c8186a8e4064",
+		"name": "ApiTests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23154633"
+	},
+	"item": [
+		{
+			"name": "UserTests",
+			"item": [
+				{
+					"name": "Добавление пользователя",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const main = async () => {\r",
+									"    const api = new API(pm);\r",
+									"    const rnd = new RandomUtils();\r",
+									"\r",
+									"    let user;\r",
+									"    try {\r",
+									"         user = rnd.getUser();\r",
+									"    } catch(err) {\r",
+									"        console.error(\"Ошибка при подготовке тестовых данных.\", err);\r",
+									"    }\r",
+									"\r",
+									"    pm.request.body.update({\r",
+									"        mode: 'raw',\r",
+									"        raw: JSON.stringify(user),\r",
+									"        options: { raw: { language: 'json' } }\r",
+									"    });\r",
+									"};\r",
+									"\r",
+									"const interval = setInterval(() => {}, 1000);\r",
+									"\r",
+									"setTimeout(async () => \r",
+									"    {\r",
+									"        try {\r",
+									"            await main();\r",
+									"        } catch (e) {\r",
+									"            console.error(e);\r",
+									"        } finally {\r",
+									"            clearInterval(interval);\r",
+									"        }\r",
+									"    },  \r",
+									"    100 \r",
+									");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Ответ должен содержать код статуса 201 и данные в формате json\", function () {\r",
+									"    pm.response.to.be.status(201);    \r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"const source = JSON.parse(pm.request.body.raw);\r",
+									"const target = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Пользователь должны содержать поля: id, name, lastName, surName, birthday\", function () {\r",
+									"pm.expect(target).to.have.property('id');\r",
+									"pm.expect(target).to.have.property('name');\r",
+									"pm.expect(target).to.have.property('lastName');\r",
+									"pm.expect(target).to.have.property('surName');\r",
+									"pm.expect(target).to.have.property('birthday');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Данные в ответе должны соответствовать данным в запросе\", function () {\r",
+									"    pm.expect(target.id).to.not.be.null;\r",
+									"    pm.expect(source.name).equal(target.name, 'имя должно совпадать с отправленным');\r",
+									"    pm.expect(source.lastName).equal(target.lastName, 'фамилия должен совпадать с отправленным');\r",
+									"    pm.expect(source.surName).equal(target.surName, 'отчетство должно совпадать с отправленным');\r",
+									"    pm.expect(source.birthday).equal(target.birthday, 'дата должна совпадать с отправленной');\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{{request_body}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Изменение пользователя",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const main = async () => {\r",
+									"    const api = new API(pm);\r",
+									"    const rnd = new RandomUtils();\r",
+									"    let user\r",
+									"    try {\r",
+									"        user = await api.addUser(rnd.getUser());\r",
+									"    } catch(err) {\r",
+									"        console.error(\"Ошибка при подготовке тестовых данных.\", err);\r",
+									"    }\r",
+									"    pm.collectionVariables.set(\"userid\", Number(user.id))\r",
+									"    pm.request.body.update({\r",
+									"        mode: 'raw',\r",
+									"        raw: JSON.stringify({\r",
+									"            name : rnd.getUser().name,\r",
+									"            lastName : rnd.getUser().lastName,\r",
+									"            surName : rnd.getUser().surName,\r",
+									"            birthday : rnd.getUser().birthday\r",
+									"        }),\r",
+									"        options: { raw: { language: 'json' } }\r",
+									"    });\r",
+									"};\r",
+									"\r",
+									"const interval = setInterval(() => {}, 1000);\r",
+									"\r",
+									"setTimeout(async () => \r",
+									"    {\r",
+									"        try {\r",
+									"            await main();\r",
+									"        } catch (e) {\r",
+									"            console.error(e);\r",
+									"        } finally {\r",
+									"            clearInterval(interval);\r",
+									"        }\r",
+									"    },  \r",
+									"    100 \r",
+									");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Ответ должен содержать код статуса 200 и данные в формате json\", function () {\r",
+									"    pm.response.to.be.ok;    \r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"const source = JSON.parse(pm.request.body.raw);\r",
+									"const target = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Пользователь должен содержать поля: id, name, lastName, surName, birthday\", function () {\r",
+									"pm.expect(target).to.have.property('id');\r",
+									"pm.expect(target).to.have.property('name');\r",
+									"pm.expect(target).to.have.property('lastName');\r",
+									"pm.expect(target).to.have.property('surName');\r",
+									"pm.expect(target).to.have.property('birthday');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Данные в ответе должны соответствовать данным в запросе\", function () {\r",
+									"    pm.expect(target.id).to.not.be.null;\r",
+									"    pm.expect(source.name).equal(target.name, 'Имя должно совпадать с отправленным');\r",
+									"    pm.expect(source.lastName).equal(target.lastName, 'Фамилия должна совпадать с отправленной');\r",
+									"    pm.expect(source.surName).equal(target.surName, 'Отчество должно совпадать с отправленным');\r",
+									"    pm.expect(target.birthday).equal(target.birthday, 'Дата должна совпадать с отправленной');\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{{request_body}}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/:userid",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								":userid"
+							],
+							"variable": [
+								{
+									"key": "userid",
+									"value": "{{userid}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Удаление пользователя",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const main = async () => {\r",
+									"    const api = new API(pm);\r",
+									"    const rnd = new RandomUtils();\r",
+									"\r",
+									"    try {\r",
+									"        const user = await api.addUser(rnd.getUser());\r",
+									"        const findedUser = await api.findUser(user.id);\r",
+									"        pm.collectionVariables.set(\"userid\", user.id)\r",
+									"        pm.collectionVariables.set(\"response\", findedUser)\r",
+									"    } catch(err) {\r",
+									"        console.error(\"Ошибка при подготовке тестовых данных.\", err);\r",
+									"    }\r",
+									"};\r",
+									"\r",
+									"const interval = setInterval(() => {}, 1000);\r",
+									"\r",
+									"setTimeout(async () => \r",
+									"    {\r",
+									"        try {\r",
+									"            await main();\r",
+									"        } catch (e) {\r",
+									"            console.error(e);\r",
+									"        } finally {\r",
+									"            clearInterval(interval);\r",
+									"        }\r",
+									"    },  \r",
+									"    100 \r",
+									");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Ответ должен содержать код статуса 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});\r",
+									"\r",
+									"source = pm.collectionVariables.get('response');\r",
+									"userId = pm.collectionVariables.get('userid');\r",
+									"\r",
+									"pm.test(\"Контактная информация должна быть найдена до удаления\", function () {\r",
+									"    pm.expect(source.id).equal(userId, 'Идентификатор пользователя должен совпадать с удаляемым');\r",
+									"});\r",
+									"\r",
+									"pm.sendRequest({\r",
+									"            url: pm.collectionVariables.get(\"baseUrl\") + \"/users/\" + userId,\r",
+									"            method: 'GET',\r",
+									"        }, (error, response) => {\r",
+									"            pm.test(\"Пользователь не должен быть найден после удаления\", function () {\r",
+									"                pm.expect(response.code).to.eql(404);\r",
+									"            });\r",
+									"        });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/users/:userId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								":userId"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "{{userid}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получение пользователя по id",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const main = async () => {\r",
+									"    const api = new API(pm);\r",
+									"    const rnd = new RandomUtils();\r",
+									"\r",
+									"    try {\r",
+									"        const user = await api.addUser(rnd.getUser());\r",
+									"        pm.collectionVariables.set(\"response\", user)\r",
+									"        pm.collectionVariables.set(\"userid\", user.id)\r",
+									"    } catch(err) {\r",
+									"        console.error(\"Ошибка при подготовке тестовых данных.\", err);\r",
+									"    }\r",
+									"};\r",
+									"\r",
+									"const interval = setInterval(() => {}, 1000);\r",
+									"\r",
+									"setTimeout(async () => \r",
+									"    {\r",
+									"        try {\r",
+									"            await main();\r",
+									"        } catch (e) {\r",
+									"            console.error(e);\r",
+									"        } finally {\r",
+									"            clearInterval(interval);\r",
+									"        }\r",
+									"    },  \r",
+									"    100 \r",
+									");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Ответ должен содержать код статуса 200 и данные в формате json\", function () {\r",
+									"    pm.response.to.be.ok;    \r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"const source = pm.collectionVariables.get('response');\r",
+									"const target = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Пользователь должен содержать поля: id, name, lastName, surName, birthday\", function () {\r",
+									"pm.expect(target).to.have.property('id');\r",
+									"pm.expect(target).to.have.property('name');\r",
+									"pm.expect(target).to.have.property('lastName');\r",
+									"pm.expect(target).to.have.property('surName');\r",
+									"pm.expect(target).to.have.property('birthday');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Данные в ответе должны соответствовать данным в запросе\", function () {\r",
+									"    pm.expect(source.id).equal(target.id, 'Идентификатор пользователя должен соответствовать идентификатору в запросе');\r",
+									"    pm.expect(source.name).equal(target.name, 'Имя должно совпадать с отправленным');\r",
+									"    pm.expect(source.lastName).equal(target.lastName, 'Фамилия должна совпадать с отправленной');\r",
+									"    pm.expect(source.surName).equal(target.surName, 'Отчество должно совпадать с отправленным');\r",
+									"    pm.expect(source.birthday).equal(target.birthday, 'Дата должна совпадать с отправленной');\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/users/:userId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								":userId"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "{{userid}}",
+									"description": "(Required) id"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получение всех пользователей",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const main = async () => {\r",
+									"    const api = new API(pm);\r",
+									"    const rnd = new RandomUtils();\r",
+									"\r",
+									"    try {\r",
+									"        const user = await api.addUser(rnd.getUser());\r",
+									"        pm.collectionVariables.set(\"response\", user)\r",
+									"    } catch(err) {\r",
+									"        console.error(\"Ошибка при подготовке тестовых данных.\", err);\r",
+									"    }\r",
+									"};\r",
+									"\r",
+									"const interval = setInterval(() => {}, 1000);\r",
+									"\r",
+									"setTimeout(async () => \r",
+									"    {\r",
+									"        try {\r",
+									"            await main();\r",
+									"        } catch (e) {\r",
+									"            console.error(e);\r",
+									"        } finally {\r",
+									"            clearInterval(interval);\r",
+									"        }\r",
+									"    },  \r",
+									"    100 \r",
+									");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Ответ должен содержать код статуса 200 и данные в формате json\", function () {\r",
+									"    pm.response.to.be.ok;    \r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"const source = pm.collectionVariables.get('response');\r",
+									"const target = pm.response.json();\r",
+									"let founded;\r",
+									"target.forEach(function(element){if (element.id == source.id) founded = element});\r",
+									"\r",
+									"pm.test(\"Пользователь должен содержать поля: id, name, lastName, surName, birthday\", function () {\r",
+									"pm.expect(target[0]).to.have.property('id');\r",
+									"pm.expect(target[0]).to.have.property('name');\r",
+									"pm.expect(target[0]).to.have.property('lastName');\r",
+									"pm.expect(target[0]).to.have.property('surName');\r",
+									"pm.expect(target[0]).to.have.property('birthday');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Данные в ответе должны соответствовать данным в запросе\", function () {\r",
+									"    pm.expect(source.id).equal(founded.id, 'Идентификатор пользователя должен соответствовать идентификатору добавленному ранее');\r",
+									"    pm.expect(source.name).equal(founded.name, 'Имя должно соответствовать имени добавленному ранее');\r",
+									"    pm.expect(source.lastName).equal(founded.lastName, 'Фамилия должна соответствовать фамилии добавленной ранее');\r",
+									"    pm.expect(source.surName).equal(founded.surName, 'Отчество должно соответствовать отчеству добавленному ранее');\r",
+									"    pm.expect(source.birthday).equal(founded.birthday, 'Дата рождения должна соответствовать добавленной ранее');\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/users?from=0&size=1000",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "from",
+									"value": "0",
+									"description": "смещение страницы"
+								},
+								{
+									"key": "size",
+									"value": "1000",
+									"description": "количество"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ContactInfoTests",
+			"item": [
+				{
+					"name": "Добавление контактных данных",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const main = async () => {\r",
+									"    const api = new API(pm);\r",
+									"    const rnd = new RandomUtils();\r",
+									"\r",
+									"    let contactInfo;\r",
+									"    try {\r",
+									"        const user = await api.addUser(rnd.getUser());\r",
+									"        contactInfo = rnd.getContactInfo(user.id);\r",
+									"    } catch(err) {\r",
+									"        console.error(\"Ошибка при подготовке тестовых данных.\", err);\r",
+									"    }\r",
+									"\r",
+									"    pm.request.body.update({\r",
+									"        mode: 'raw',\r",
+									"        raw: JSON.stringify(contactInfo),\r",
+									"        options: { raw: { language: 'json' } }\r",
+									"    });\r",
+									"};\r",
+									"\r",
+									"const interval = setInterval(() => {}, 1000);\r",
+									"\r",
+									"setTimeout(async () => \r",
+									"    {\r",
+									"        try {\r",
+									"            await main();\r",
+									"        } catch (e) {\r",
+									"            console.error(e);\r",
+									"        } finally {\r",
+									"            clearInterval(interval);\r",
+									"        }\r",
+									"    },  \r",
+									"    100 \r",
+									");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Ответ должен содержать код статуса 201 и данные в формате json\", function () {\r",
+									"    pm.response.to.be.status(201);    \r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"const source = JSON.parse(pm.request.body.raw);\r",
+									"const target = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Контактные данные должны содержать поля: id, email, phone, user\", function () {\r",
+									"pm.expect(target).to.have.property('id');\r",
+									"pm.expect(target).to.have.property('email');\r",
+									"pm.expect(target).to.have.property('phone');\r",
+									"pm.expect(target).to.have.property('user');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Данные в ответе должны соответствовать данным в запросе\", function () {\r",
+									"    pm.expect(target.id).to.not.be.null;\r",
+									"    pm.expect(source.email).equal(target.email, 'email должен совпадать с отправленным');\r",
+									"    pm.expect(source.phone).equal(target.phone, 'телефон должен совпадать с отправленным');\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{{request_body}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/info",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"info"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Изменение контактной информации",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const main = async () => {\r",
+									"    const api = new API(pm);\r",
+									"    const rnd = new RandomUtils();\r",
+									"    let contactInfo\r",
+									"    try {\r",
+									"        const user = await api.addUser(rnd.getUser());\r",
+									"        contactInfo = await api.addContactInfo(rnd.getContactInfo(user.id));\r",
+									"    } catch(err) {\r",
+									"        console.error(\"Ошибка при подготовке тестовых данных.\", err);\r",
+									"    }\r",
+									"    pm.collectionVariables.set(\"infoid\", Number(contactInfo.id))\r",
+									"    pm.request.body.update({\r",
+									"        mode: 'raw',\r",
+									"        raw: JSON.stringify({\r",
+									"            phone : rnd.getContactInfo().phone,\r",
+									"            email : rnd.getContactInfo().email,\r",
+									"        }),\r",
+									"        options: { raw: { language: 'json' } }\r",
+									"    });\r",
+									"};\r",
+									"\r",
+									"const interval = setInterval(() => {}, 1000);\r",
+									"\r",
+									"setTimeout(async () => \r",
+									"    {\r",
+									"        try {\r",
+									"            await main();\r",
+									"        } catch (e) {\r",
+									"            console.error(e);\r",
+									"        } finally {\r",
+									"            clearInterval(interval);\r",
+									"        }\r",
+									"    },  \r",
+									"    100 \r",
+									");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Ответ должен содержать код статуса 200 и данные в формате json\", function () {\r",
+									"    pm.response.to.be.ok;    \r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"const source = JSON.parse(pm.request.body.raw);\r",
+									"const target = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Контактная информация должна содержать поля: id, phone, email, user\", function () {\r",
+									"pm.expect(target).to.have.property('id');\r",
+									"pm.expect(target).to.have.property('phone');\r",
+									"pm.expect(target).to.have.property('email');\r",
+									"pm.expect(target).to.have.property('user');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Данные в ответе должны соответствовать данным в запросе\", function () {\r",
+									"    pm.expect(target.id).to.not.be.null;\r",
+									"    pm.expect(source.email).equal(target.email, 'Email должен совпадать с отправленным');\r",
+									"    pm.expect(source.phone).equal(target.phone, 'Телефон должен совпадать с отправленным');\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{{request_body}}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/info/:infoid",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"info",
+								":infoid"
+							],
+							"variable": [
+								{
+									"key": "infoid",
+									"value": "{{infoid}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Удаление контактной информации",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const main = async () => {\r",
+									"    const api = new API(pm);\r",
+									"    const rnd = new RandomUtils();\r",
+									"\r",
+									"    try {\r",
+									"        const user = await api.addUser(rnd.getUser());\r",
+									"        const contactInfo = await api.addContactInfo(rnd.getContactInfo(user.id));\r",
+									"        const findedContactInfo = await api.findContactInfo(contactInfo.id);\r",
+									"        pm.collectionVariables.set(\"infoid\", contactInfo.id)\r",
+									"        pm.collectionVariables.set(\"response\", findedContactInfo)\r",
+									"    } catch(err) {\r",
+									"        console.error(\"Ошибка при подготовке тестовых данных.\", err);\r",
+									"    }\r",
+									"};\r",
+									"\r",
+									"const interval = setInterval(() => {}, 1000);\r",
+									"\r",
+									"setTimeout(async () => \r",
+									"    {\r",
+									"        try {\r",
+									"            await main();\r",
+									"        } catch (e) {\r",
+									"            console.error(e);\r",
+									"        } finally {\r",
+									"            clearInterval(interval);\r",
+									"        }\r",
+									"    },  \r",
+									"    100 \r",
+									");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Ответ должен содержать код статуса 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});\r",
+									"\r",
+									"source = pm.collectionVariables.get('response');\r",
+									"infoId = pm.collectionVariables.get('infoid');\r",
+									"\r",
+									"pm.test(\"Контактная информация должна быть найдена до удаления\", function () {\r",
+									"    pm.expect(source.id).equal(infoId, 'Идентификатор контактной информации должен совпадать с удаляемым');\r",
+									"});\r",
+									"\r",
+									"pm.sendRequest({\r",
+									"            url: pm.collectionVariables.get(\"baseUrl\") + \"/info/\" + infoId,\r",
+									"            method: 'GET',\r",
+									"        }, (error, response) => {\r",
+									"            pm.test(\"Контактная информация не должна быть найдена после удаления\", function () {\r",
+									"                pm.expect(response.code).to.eql(404);\r",
+									"            });\r",
+									"        });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/info/:infoId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"info",
+								":infoId"
+							],
+							"variable": [
+								{
+									"key": "infoId",
+									"value": "{{infoid}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получение контактной информации по id",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const main = async () => {\r",
+									"    const api = new API(pm);\r",
+									"    const rnd = new RandomUtils();\r",
+									"\r",
+									"    try {\r",
+									"        const user = await api.addUser(rnd.getUser());\r",
+									"        const contactInfo = await api.addContactInfo(rnd.getContactInfo(user.id));\r",
+									"        pm.collectionVariables.set(\"response\", contactInfo)\r",
+									"        pm.collectionVariables.set(\"infoid\", contactInfo.id)\r",
+									"    } catch(err) {\r",
+									"        console.error(\"Ошибка при подготовке тестовых данных.\", err);\r",
+									"    }\r",
+									"};\r",
+									"\r",
+									"const interval = setInterval(() => {}, 1000);\r",
+									"\r",
+									"setTimeout(async () => \r",
+									"    {\r",
+									"        try {\r",
+									"            await main();\r",
+									"        } catch (e) {\r",
+									"            console.error(e);\r",
+									"        } finally {\r",
+									"            clearInterval(interval);\r",
+									"        }\r",
+									"    },  \r",
+									"    100 \r",
+									");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Ответ должен содержать код статуса 200 и данные в формате json\", function () {\r",
+									"    pm.response.to.be.ok;    \r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"const source = pm.collectionVariables.get('response');\r",
+									"const target = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Контактная информация должна содержать поля: id, email, phone, user\", function () {\r",
+									"pm.expect(target).to.have.property('id');\r",
+									"pm.expect(target).to.have.property('email');\r",
+									"pm.expect(target).to.have.property('phone');\r",
+									"pm.expect(target).to.have.property('user');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Данные в ответе должны соответствовать данным в запросе\", function () {\r",
+									"    pm.expect(source.id).equal(target.id, 'Идентификатор локации должен соответствовать идентификатору в запросе');\r",
+									"    pm.expect(source.email).equal(target.email, 'Email должен совпадать с отправленным');\r",
+									"    pm.expect(source.phone).equal(target.phone, 'Телефон должен совпадать с отправленным');\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/info/:infoId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"info",
+								":infoId"
+							],
+							"variable": [
+								{
+									"key": "infoId",
+									"value": "{{infoid}}",
+									"description": "(Required) id"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получение всех контактных данных",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const main = async () => {\r",
+									"    const api = new API(pm);\r",
+									"    const rnd = new RandomUtils();\r",
+									"\r",
+									"    try {\r",
+									"        const user = await api.addUser(rnd.getUser());\r",
+									"        const contactInfo = await api.addContactInfo(rnd.getContactInfo(user.id));\r",
+									"        pm.collectionVariables.set(\"response\", contactInfo)\r",
+									"    } catch(err) {\r",
+									"        console.error(\"Ошибка при подготовке тестовых данных.\", err);\r",
+									"    }\r",
+									"};\r",
+									"\r",
+									"const interval = setInterval(() => {}, 1000);\r",
+									"\r",
+									"setTimeout(async () => \r",
+									"    {\r",
+									"        try {\r",
+									"            await main();\r",
+									"        } catch (e) {\r",
+									"            console.error(e);\r",
+									"        } finally {\r",
+									"            clearInterval(interval);\r",
+									"        }\r",
+									"    },  \r",
+									"    100 \r",
+									");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Ответ должен содержать код статуса 200 и данные в формате json\", function () {\r",
+									"    pm.response.to.be.ok;    \r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"const source = pm.collectionVariables.get('response');\r",
+									"const target = pm.response.json();\r",
+									"let founded;\r",
+									"target.forEach(function(element){if (element.id == source.id) founded = element});\r",
+									"\r",
+									"pm.test(\"Контактная информация должна содержать поля: id, email, phone, user\", function () {\r",
+									"pm.expect(target[0]).to.have.property('id');\r",
+									"pm.expect(target[0]).to.have.property('email');\r",
+									"pm.expect(target[0]).to.have.property('phone');\r",
+									"pm.expect(target[0]).to.have.property('user');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Данные в ответе должны соответствовать данным в запросе\", function () {\r",
+									"    pm.expect(source.id).equal(founded.id, 'Идентификатор контактной информации должен соответствовать идентификатору добавленному ранее');\r",
+									"    pm.expect(source.email).equal(founded.email, 'Email должен соответствовать email добавленному ранее');\r",
+									"    pm.expect(source.phone).equal(founded.phone, 'Телефон должнен соответствовать телефону добавленному ранее');\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/info?from=0&size=1000",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"info"
+							],
+							"query": [
+								{
+									"key": "from",
+									"value": "0",
+									"description": "смещение страницы"
+								},
+								{
+									"key": "size",
+									"value": "1000",
+									"description": "количество"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "{{password}}",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "{{username}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"API = class {",
+					"    constructor(postman, verbose = false, baseUrl = \"http://localhost:8080\") {",
+					"        this.baseUrl = baseUrl;",
+					"        this.pm = postman;",
+					"        this._verbose = verbose;",
+					"    }",
+					"",
+					"    async addUser(user, verbose=null) {",
+					"        return this.post(\"/users\", user, \"Ошибка при добавлении нового пользователя: \", verbose);",
+					"    }",
+					"",
+					"    async addContactInfo(contactInfo, verbose=null) {",
+					"    return this.post(\"/info\", contactInfo, \"Ошибка при добавлении контактной информации: \", verbose);",
+					"    }",
+					"",
+					"    async findUser(userId, verbose=null) {",
+					"        return this.get('/users/' + userId, null, \"Ошибка при поиске пользователя по id\", verbose);",
+					"    }",
+					"",
+					"    async findContactInfo(infoId, verbose=null) {",
+					"        return this.get('/info/' + infoId, null, \"Ошибка при поиске контактных данных по id\", verbose);",
+					"    }",
+					"",
+					"    async post(path, body, errorText = \"Ошибка при выполнении post-запроса: \", verbose=null) {",
+					"        return this.sendRequest(\"POST\", path, body, errorText, verbose);",
+					"    }",
+					"",
+					"    async patch(path, body = null, errorText = \"Ошибка при выполнении patch-запроса: \", verbose=null) {",
+					"        return this.sendRequest(\"PATCH\", path, body, errorText, verbose);",
+					"    }",
+					"",
+					"    async get(path, body = null, errorText = \"Ошибка при выполнении get-запроса: \", verbose=null) {",
+					"        return this.sendRequest(\"GET\", path, body, errorText, verbose);",
+					"    }",
+					"",
+					"    async sendRequest(method, path, body=null, errorText = \"Ошибка при выполнении запроса: \", verbose=null) {",
+					"        return new Promise((resolve, reject) => {",
+					"            verbose = verbose == null ? this._verbose : verbose;",
+					"",
+					"            const request = {",
+					"                url: this.baseUrl + path,",
+					"                method: method,",
+					"                body: body == null ? \"\" : JSON.stringify(body),",
+					"                header: { \"Content-Type\": \"application/json\" },",
+					"            };",
+					"",
+					"            if(verbose) {",
+					"                console.log(\"Отправляю запрос: \", request);",
+					"            }",
+					"",
+					"            try {",
+					"                this.pm.sendRequest(request, (error, response) => {",
+					"                    if(error || (response.code >= 400 && response.code <= 599)) {",
+					"                        let err = error ? error : JSON.stringify(response.json());",
+					"                        console.error(\"При выполнении запроса к серверу возникла ошика.\\n\", err,",
+					"                             \"\\nДля отладки проблемы повторите такой же запрос к вашей программе \" + ",
+					"                             \"на локальном компьютере. Данные запроса:\\n\", JSON.stringify(request));",
+					"",
+					"                        reject(new Error(errorText + err));",
+					"                    }",
+					"",
+					"                    if(verbose) {",
+					"                        console.log(\"Результат обработки запроса: код состояния - \", response.code, \", тело: \", response.json());",
+					"                    }",
+					"",
+					"                    resolve(response.json());",
+					"                });",
+					"            } catch(err) {",
+					"                if(verbose) {",
+					"                    console.error(errorText, err);",
+					"                }",
+					"                return Promise.reject(err);",
+					"            }",
+					"        });",
+					"    }",
+					"};",
+					"",
+					"RandomUtils = class {",
+					"    constructor() {}",
+					"",
+					"    getUser() {",
+					"        return {",
+					"            name: pm.variables.replaceIn('{{$randomFirstName}}'),",
+					"            lastName: pm.variables.replaceIn('{{$randomLastName}}'),",
+					"            surName: pm.variables.replaceIn('{{$randomFirstName}}'),",
+					"            birthday: this.getDateTime()",
+					"        };",
+					"    }",
+					"",
+					"    getContactInfo(userId) {",
+					"        return {",
+					"            email: pm.variables.replaceIn('{{$randomEmail}}'),",
+					"            user: userId,",
+					"            phone: pm.variables.replaceIn('{{$randomPhoneNumber}}')",
+					"        };",
+					"    }",
+					"",
+					"    getDateTime() {",
+					"        const moment = require('moment');",
+					"        let pastDate = pm.variables.replaceIn('{{$randomDatePast}}');",
+					"        pastDate = moment(pastDate).format((\"YYYY-MM-DD\"));",
+					"        return pastDate;",
+					"    }",
+					"}"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8080",
+			"type": "string"
+		},
+		{
+			"key": "name",
+			"value": ""
+		},
+		{
+			"key": "usersCount",
+			"value": 1,
+			"type": "number"
+		},
+		{
+			"key": "catid",
+			"value": 1,
+			"type": "number"
+		},
+		{
+			"key": "request_body",
+			"value": ""
+		},
+		{
+			"key": "mail",
+			"value": ""
+		},
+		{
+			"key": "response",
+			"value": ""
+		},
+		{
+			"key": "uid",
+			"value": 1,
+			"type": "number"
+		},
+		{
+			"key": "catname",
+			"value": ""
+		},
+		{
+			"key": "eid",
+			"value": 1,
+			"type": "number"
+		},
+		{
+			"key": "compid",
+			"value": 1,
+			"type": "number"
+		},
+		{
+			"key": "toCheck",
+			"value": ""
+		},
+		{
+			"key": "newDataToSet",
+			"value": ""
+		},
+		{
+			"key": "uid1",
+			"value": ""
+		},
+		{
+			"key": "reqid",
+			"value": 1,
+			"type": "number"
+		},
+		{
+			"key": "catId",
+			"value": ""
+		},
+		{
+			"key": "userid",
+			"value": ""
+		},
+		{
+			"key": "infoid",
+			"value": ""
+		},
+		{
+			"key": "username",
+			"value": "admin",
+			"type": "string"
+		},
+		{
+			"key": "password",
+			"value": "123",
+			"type": "string"
+		}
+	]
 }

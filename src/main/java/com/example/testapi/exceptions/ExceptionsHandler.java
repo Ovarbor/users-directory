@@ -1,4 +1,4 @@
-package com.example.testapi.exceptions;
+package com.example.TestAPI.exceptions;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -65,6 +65,14 @@ public class ExceptionsHandler {
         return ResponseEntity
                 .status(HttpStatus.FORBIDDEN)
                 .body(new ErrorMessage(e.getMessage()));
+    }
+
+    @ExceptionHandler(ImageNotFoundException.class)
+    public ResponseEntity<ErrorMessage> imageNotFoundException(ImageNotFoundException exception) {
+        log.warn(exception.getMessage(), exception);
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(new ErrorMessage(exception.getMessage()));
     }
 
     @Getter

@@ -1,4 +1,4 @@
-package com.example.testapi;
+package com.example.TestAPI;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

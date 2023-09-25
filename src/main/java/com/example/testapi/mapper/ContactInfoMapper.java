@@ -1,12 +1,15 @@
-package com.example.testapi.mapper;
-import com.example.testapi.dto.ContactInfoDto;
-import com.example.testapi.dto.NewContactInfoDto;
-import com.example.testapi.model.ContactInfo;
+package com.example.TestAPI.mapper;
+import com.example.TestAPI.dto.ContactInfoDto;
+import com.example.TestAPI.dto.NewContactInfoDto;
+import com.example.TestAPI.model.ContactInfo;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.ReportingPolicy;
+
 import java.util.List;
 
-@Mapper(componentModel = "spring")
+@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE,
+        componentModel = "spring", uses = {ContactInfoMapper.class, UserMapper.class})
 public interface ContactInfoMapper {
 
     ContactInfoDto toContactInfoDto(ContactInfo contactInfo);

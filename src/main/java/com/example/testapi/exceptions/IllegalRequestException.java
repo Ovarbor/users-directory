@@ -1,4 +1,4 @@
-package com.example.testapi.exceptions;
+package com.example.TestAPI.exceptions;
 
 public class IllegalRequestException extends RuntimeException {
     public IllegalRequestException(String message) {

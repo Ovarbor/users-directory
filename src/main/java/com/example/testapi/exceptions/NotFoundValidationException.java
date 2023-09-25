@@ -1,4 +1,4 @@
-package com.example.testapi.exceptions;
+package com.example.TestAPI.exceptions;
 
 public class NotFoundValidationException extends RuntimeException {
     public NotFoundValidationException(String message) {

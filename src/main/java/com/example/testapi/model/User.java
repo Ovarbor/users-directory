@@ -1,8 +1,5 @@
-package com.example.testapi.model;
-
-
+package com.example.TestAPI.model;
 import lombok.*;
-
 import javax.persistence.*;
 import javax.validation.constraints.Past;
 import java.time.LocalDate;

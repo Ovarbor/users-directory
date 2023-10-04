@@ -1,14 +1,15 @@
 package com.example.TestAPI.dto;
-import com.example.TestAPI.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ContactInfoDto {
+public class ContactInfoDtoUpdate {
 
     private Long id;
 
@@ -17,5 +18,6 @@ public class ContactInfoDto {
 
     private String phone;
 
-    private User user;
+    @NotNull
+    private Long user;
 }

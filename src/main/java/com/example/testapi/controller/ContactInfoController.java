@@ -1,5 +1,7 @@
 package com.example.TestAPI.controller;
 import com.example.TestAPI.dto.ContactInfoDto;
+import com.example.TestAPI.dto.ContactInfoDtoGet;
+import com.example.TestAPI.dto.ContactInfoDtoUpdate;
 import com.example.TestAPI.dto.NewContactInfoDto;
 import com.example.TestAPI.service.ContactInfoService;
 import lombok.RequiredArgsConstructor;
@@ -27,26 +29,26 @@ public class ContactInfoController {
     }
 
     @GetMapping("/{infoId}")
-    public ResponseEntity<ContactInfoDto> getContactInfo(@PathVariable Long infoId) {
+    public ResponseEntity<ContactInfoDtoGet> getContactInfo(@PathVariable Long infoId) {
         log.info("GET /info/{}", infoId);
-        return ResponseEntity.ok().body(contactInfoService.findContactInfo(infoId));
+        return ResponseEntity.ok().body(contactInfoService.getContactInfo(infoId));
     }
 
     @GetMapping
-    ResponseEntity<List<ContactInfoDto>> getContactInfos(
+    ResponseEntity<List<ContactInfoDtoGet>> getContactInfos(
             @RequestParam(value = "from", defaultValue = "0")
             @PositiveOrZero Integer from,
             @RequestParam(value = "size", defaultValue = "10")
             @Positive Integer size) {
         log.info("GET /info?from=" + from + "&size=" + size);
-        return ResponseEntity.ok().body(contactInfoService.findAllContactInfo(from, size));
+        return ResponseEntity.ok().body(contactInfoService.getAllContactInfo(from, size));
     }
 
     @PatchMapping("/{infoId}")
     public ResponseEntity<ContactInfoDto> updateContactInfo(@PathVariable Long infoId,
-                                                   @Valid @RequestBody ContactInfoDto contactInfoDto) {
+                                                   @Valid @RequestBody ContactInfoDtoUpdate contactInfoDtoUpdate) {
         log.info("PATCH: /info/{}", infoId);
-        return ResponseEntity.ok().body(contactInfoService.updateContactInfo(infoId, contactInfoDto));
+        return ResponseEntity.ok().body(contactInfoService.updateContactInfo(infoId, contactInfoDtoUpdate));
     }
 
     @DeleteMapping("/{infoId}")

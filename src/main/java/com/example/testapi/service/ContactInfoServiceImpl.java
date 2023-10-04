@@ -1,6 +1,8 @@
 package com.example.TestAPI.service;
-
+import com.example.TestAPI.Utils.CreateImageLink;
 import com.example.TestAPI.dto.ContactInfoDto;
+import com.example.TestAPI.dto.ContactInfoDtoGet;
+import com.example.TestAPI.dto.ContactInfoDtoUpdate;
 import com.example.TestAPI.dto.NewContactInfoDto;
 import com.example.TestAPI.exceptions.NotFoundValidationException;
 import com.example.TestAPI.mapper.ContactInfoMapper;
@@ -39,44 +41,59 @@ public class ContactInfoServiceImpl implements ContactInfoService {
     }
 
     @Override
-    public ContactInfoDto findContactInfo(Long infoId) {
+    public ContactInfoDtoGet getContactInfo(Long infoId) {
         ContactInfo contactInfo = contactInfoRepo.findById(infoId).orElseThrow(() ->
-                new NotFoundValidationException("ContactInfo with id: " + infoId + " not found"));
-        return contactInfoMapper.toContactInfoDto(contactInfo);
+                new NotFoundValidationException("Contact with id " + infoId + " not found"));
+        ContactInfoDto contactInfoDto = contactInfoMapper.toContactInfoDto(contactInfo);
+        ContactInfoDtoGet contactInfoDtoGet = contactInfoMapper.toContactInfoDtoGet(contactInfoDto);
+        if (contactInfoDtoGet.getUser().getImage() != null) {
+            contactInfoDtoGet.getUser().getImage()
+                    .setLink(CreateImageLink.createImageLink(contactInfoDtoGet.getUser().getImage().getId()));
+        }
+        return contactInfoDtoGet;
     }
 
     @Override
-    public List<ContactInfoDto> findAllContactInfo(int from, int size) {
-        List<ContactInfo> contactInfoList = contactInfoRepo.findAll(PageRequest.of(from, size, Sort.by("id").ascending())).toList();
-        return contactInfoMapper.toContactInfoDtoList(contactInfoList);
+    public List<ContactInfoDtoGet> getAllContactInfo(int from, int size) {
+        List<ContactInfo> contactInfoList = contactInfoRepo
+                .findAll(PageRequest.of(from, size, Sort.by("id").ascending())).toList();
+        List<ContactInfoDtoGet> contactInfoDtoGets = contactInfoMapper.toContactInfoDtoGetList(contactInfoList);
+        contactInfoDtoGets.stream().filter(contactInfoDtoGet -> contactInfoDtoGet.getUser().getImage() != null)
+                .forEach(contactInfoDtoGet -> contactInfoDtoGet.getUser().getImage()
+                        .setLink(CreateImageLink.createImageLink(contactInfoDtoGet.getUser().getImage().getId())));
+        return contactInfoDtoGets;
     }
 
     @Override
-    public ContactInfoDto updateContactInfo(Long infoId, ContactInfoDto contactInfoDto) {
+    public ContactInfoDto updateContactInfo(Long infoId, ContactInfoDtoUpdate contactInfoDtoUpdate) {
         ContactInfo oldInfo = contactInfoRepo.findById(infoId).orElseThrow(() ->
-                new NotFoundValidationException("Contact with id: " + contactInfoDto.getId() + " not found"));
-        ContactInfo newContactInfo = infoPhoneAndEmailUpdate(oldInfo, contactInfoDto);
+                new NotFoundValidationException("Contact with id " + infoId + " not found"));
+        ContactInfo newContactInfo = infoPhoneAndEmailUpdate(oldInfo, contactInfoDtoUpdate);
         return contactInfoMapper.toContactInfoDto(contactInfoRepo.save(newContactInfo));
     }
 
     @Override
     public void removeContactInfo(Long infoId) {
         if (!contactInfoRepo.existsById(infoId)) {
-            throw new NotFoundValidationException("ContactInfo with id: " + infoId + " not found");
+            throw new NotFoundValidationException("Contact with id " + infoId + " not found");
         }
         contactInfoRepo.deleteById(infoId);
     }
 
-    private ContactInfo infoPhoneAndEmailUpdate(ContactInfo oldContactInfo, ContactInfoDto contactInfoDto) {
-        if (contactInfoDto.getEmail() != null) {
-            if (!contactInfoDto.getEmail().isBlank()) {
-                oldContactInfo.setEmail(contactInfoDto.getEmail());
+    private ContactInfo infoPhoneAndEmailUpdate(ContactInfo oldContactInfo, ContactInfoDtoUpdate contactInfoDtoUpdate) {
+        if (contactInfoDtoUpdate.getEmail() != null) {
+            if (!contactInfoDtoUpdate.getEmail().isBlank()) {
+                oldContactInfo.setEmail(contactInfoDtoUpdate.getEmail());
             }
         }
-        if (contactInfoDto.getPhone() != null) {
-            if (!contactInfoDto.getPhone().isBlank()) {
-                oldContactInfo.setPhone(contactInfoDto.getPhone());
+        if (contactInfoDtoUpdate.getPhone() != null) {
+            if (!contactInfoDtoUpdate.getPhone().isBlank()) {
+                oldContactInfo.setPhone(contactInfoDtoUpdate.getPhone());
             }
+        }
+        if (contactInfoDtoUpdate.getUser() != null) {
+            oldContactInfo.setUser(userRepo.findById(contactInfoDtoUpdate.getUser()).orElseThrow(() ->
+                    new NotFoundValidationException("User with id " + contactInfoDtoUpdate.getUser() + " not found")));
         }
         return oldContactInfo;
     }

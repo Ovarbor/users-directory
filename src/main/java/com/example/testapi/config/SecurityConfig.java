@@ -38,6 +38,10 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.POST, "/users").hasRole("ADMIN")
                 .antMatchers(HttpMethod.PATCH, "/users/**").hasRole("ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/users/**").hasRole("ADMIN")
+                .antMatchers(HttpMethod.GET, "/images/**").hasRole("ADMIN")
+                .antMatchers(HttpMethod.POST, "/images").hasRole("ADMIN")
+                .antMatchers(HttpMethod.PATCH, "/images/**").hasRole("ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/images/**").hasRole("ADMIN")
                 .and()
                 .csrf().disable()
                 .formLogin().disable();

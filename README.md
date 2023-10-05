@@ -46,7 +46,8 @@ IntellijIdea
 3. Open app in IntellijIdea
 4. mvn clean package
 5. run app
-6. Test app with postman tests collection in postman package:
+6. use you PostgresDB properties DB_USERNAME; DB_PASSWORD
+7. test app with postman tests collection in postman package:
    - set up postman working directory for using image files from resources/images automatically
    - you can use any others files you want but before start collection you need add this files to POST image requests (body, form-data)
    - use tests in a given sequence

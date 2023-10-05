@@ -9,10 +9,11 @@ import javax.validation.constraints.Email;
 @NoArgsConstructor
 public class NewContactInfoDto {
 
-    private String phone;
 
     @Email(message = "Invalid email")
     private String email;
+
+    private String phone;
 
     private Long user;
 }

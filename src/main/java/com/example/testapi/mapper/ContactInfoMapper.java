@@ -1,5 +1,6 @@
 package com.example.TestAPI.mapper;
 import com.example.TestAPI.dto.ContactInfoDto;
+import com.example.TestAPI.dto.ContactInfoDtoGet;
 import com.example.TestAPI.dto.NewContactInfoDto;
 import com.example.TestAPI.model.ContactInfo;
 import org.mapstruct.Mapper;
@@ -17,5 +18,7 @@ public interface ContactInfoMapper {
     @Mapping(source = "user", target = "user.id")
     ContactInfo toContactInfo(NewContactInfoDto newContactInfoDto);
 
-    List<ContactInfoDto> toContactInfoDtoList(List<ContactInfo> contactInfoList);
+    List<ContactInfoDtoGet> toContactInfoDtoGetList(List<ContactInfo> contactInfoList);
+
+    ContactInfoDtoGet toContactInfoDtoGet(ContactInfoDto contactInfoDto);
 }

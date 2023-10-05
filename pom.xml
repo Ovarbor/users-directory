@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>TestAPI</artifactId>
+	<artifactId>UsersDirectory</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>TestAPI</name>
 	<description>Demo project for Spring Boot</description>
@@ -54,7 +54,6 @@
 			<artifactId>postgresql</artifactId>
 			<scope>runtime</scope>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>

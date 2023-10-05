@@ -1,6 +1,8 @@
 package com.example.TestAPI.service;
 import com.example.TestAPI.dto.NewUserDto;
 import com.example.TestAPI.dto.UserDto;
+import com.example.TestAPI.dto.UserDtoGet;
+import com.example.TestAPI.dto.UserDtoUpdate;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
@@ -9,11 +11,11 @@ public interface UserService {
 
     UserDto addUser(NewUserDto newUserDto);
 
-    UserDto findUser(Long userId);
+    UserDtoGet getUser(Long userId);
 
-    List<UserDto> findAllUsers(int from, int size);
+    List<UserDtoGet> getAllUsers(int from, int size);
 
-    UserDto updateUser(Long userId, UserDto userDto);
+    UserDto updateUser(Long userId, UserDtoUpdate userDtoUpdate);
 
     void removeUser(Long userId);
 }

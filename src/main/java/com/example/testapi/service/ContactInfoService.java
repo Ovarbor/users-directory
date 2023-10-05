@@ -1,5 +1,7 @@
 package com.example.TestAPI.service;
 import com.example.TestAPI.dto.ContactInfoDto;
+import com.example.TestAPI.dto.ContactInfoDtoGet;
+import com.example.TestAPI.dto.ContactInfoDtoUpdate;
 import com.example.TestAPI.dto.NewContactInfoDto;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -9,13 +11,12 @@ public interface ContactInfoService {
 
     ContactInfoDto addContactInfo(NewContactInfoDto newContactInfoDto);
 
-    ContactInfoDto findContactInfo(Long infoId);
+    ContactInfoDtoGet getContactInfo(Long infoId);
 
-    List<ContactInfoDto> findAllContactInfo(int from, int size);
+    List<ContactInfoDtoGet> getAllContactInfo(int from, int size);
 
-    ContactInfoDto updateContactInfo(Long infoId, ContactInfoDto contactInfoDto);
+    ContactInfoDto updateContactInfo(Long infoId, ContactInfoDtoUpdate contactInfoDtoUpdate);
 
     void removeContactInfo(Long infoId);
-
 }
 

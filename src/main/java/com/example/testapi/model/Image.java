@@ -1,12 +1,11 @@
 package com.example.TestAPI.model;
-
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Getter
@@ -21,12 +20,16 @@ public class Image {
     @Column(name = "image_id")
     private Long id;
 
+
     @Column(name = "title")
+    @NotBlank
     private String title;
 
+    @NotBlank
     @Column(name = "type")
     private String type;
 
+    @NotNull
     @Column(name = "data")
     private byte[] data;
 }

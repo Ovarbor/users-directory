@@ -1,6 +1,8 @@
 package com.example.TestAPI.controller;
 import com.example.TestAPI.dto.NewUserDto;
 import com.example.TestAPI.dto.UserDto;
+import com.example.TestAPI.dto.UserDtoGet;
+import com.example.TestAPI.dto.UserDtoUpdate;
 import com.example.TestAPI.service.UserService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,25 +29,25 @@ public class UserController {
     }
 
     @GetMapping("/{userId}")
-    public ResponseEntity<UserDto> getUser(@PathVariable Long userId) {
+    public ResponseEntity<UserDtoGet> getUser(@PathVariable Long userId) {
         log.info("GET /users/{}", userId);
-        return ResponseEntity.ok().body(userService.findUser(userId));
+        return ResponseEntity.ok().body(userService.getUser(userId));
     }
 
     @GetMapping
-    public ResponseEntity<List<UserDto>> getUsers(@RequestParam(value = "from", defaultValue = "0")
+    public ResponseEntity<List<UserDtoGet>> getUsers(@RequestParam(value = "from", defaultValue = "0")
                                                   @PositiveOrZero Integer from,
                                                   @RequestParam(value = "size", defaultValue = "10")
                                                   @Positive Integer size) {
         log.info("GET /users?from=" + from + "&size=" + size);
-        return ResponseEntity.ok().body(userService.findAllUsers(from, size));
+        return ResponseEntity.ok().body(userService.getAllUsers(from, size));
     }
 
     @PatchMapping("/{userId}")
     public ResponseEntity<UserDto> updateUser(@PathVariable Long userId,
-                                              @Valid @RequestBody UserDto userDto) {
+                                              @Valid @RequestBody UserDtoUpdate userDtoUpdate) {
         log.info("PATCH: /users/{}", userId);
-        return ResponseEntity.ok().body(userService.updateUser(userId,userDto));
+        return ResponseEntity.ok().body(userService.updateUser(userId, userDtoUpdate));
     }
 
     @DeleteMapping("/{userId}")

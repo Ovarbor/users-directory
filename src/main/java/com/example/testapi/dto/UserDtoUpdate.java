@@ -9,8 +9,9 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class NewUserDto {
+public class UserDtoUpdate {
 
+    private Long id;
     @NotBlank
     private String name;
     @NotBlank
@@ -19,4 +20,6 @@ public class NewUserDto {
     private String surName;
     @NotNull
     private LocalDate birthday;
+    @NotNull
+    private Long image;
 }

@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ContactInfoRepo extends PagingAndSortingRepository<ContactInfo, Long> {
 
+    Integer countContactInfoByUserId(long id);
 }

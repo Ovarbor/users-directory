@@ -1,0 +1,2981 @@
+{
+  "info": {
+    "_postman_id": "",
+    "name": "UserDirectory",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": ""
+  },
+  "item": [
+    {
+      "name": "images",
+      "item": [
+        {
+          "name": "AddFirstImage",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Response must contain status code 201 и and json data\", function () {\r",
+                  "pm.response.to.be.status(201);\r",
+                  "pm.response.to.be.withBody;\r",
+                  "pm.response.to.be.json;\r",
+                  "});\r",
+                  "const target = pm.response.json();\r",
+                  "pm.test(\"Response must contain fields: id, title, type, data\", function () {\r",
+                  "pm.expect(target).to.have.property('id');\r",
+                  "pm.expect(target).to.have.property('title');\r",
+                  "pm.expect(target).to.have.property('type');\r",
+                  "pm.expect(target).to.have.property('data');\r",
+                  "});\r",
+                  "pm.test(\"Response data should not be null\", function () {\r",
+                  "var jsonData = pm.response.json();\r",
+                  "pm.expect(target.id).to.eql(1);\r",
+                  "pm.expect(target.title).to.not.be.null;\r",
+                  "pm.expect(target.type).to.not.be.null;\r",
+                  "pm.expect(target.data).to.not.be.null;\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              },
+              {
+                "key": "Authorization",
+                "value": "Basic YWRtaW46MTIz"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "description": "testFile",
+                  "type": "file",
+                  "src": "{{fileName1}}"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/images",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "images"
+              ]
+            }
+          }
+        },
+        {
+          "name": "AddSecondImage",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Response must contain status code 201 and json data\", function () {\r",
+                  "pm.response.to.be.status(201);\r",
+                  "pm.response.to.be.withBody;\r",
+                  "pm.response.to.be.json;\r",
+                  "});\r",
+                  "const target = pm.response.json();\r",
+                  "pm.test(\"Response must contain fields: id, title, type, data\", function () {\r",
+                  "pm.expect(target).to.have.property('id');\r",
+                  "pm.expect(target).to.have.property('title');\r",
+                  "pm.expect(target).to.have.property('type');\r",
+                  "pm.expect(target).to.have.property('data');\r",
+                  "});\r",
+                  "pm.test(\"Response data should not be null\", function () {\r",
+                  "var jsonData = pm.response.json();\r",
+                  "pm.expect(target.id).to.eql(2);\r",
+                  "pm.expect(target.title).to.not.be.null;\r",
+                  "pm.expect(target.type).to.not.be.null;\r",
+                  "pm.expect(target.data).to.not.be.null;\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              },
+              {
+                "key": "Authorization",
+                "value": "Basic YWRtaW46MTIz"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "description": "testFile",
+                  "type": "file",
+                  "src": "{{fileName2}}"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/images",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "images"
+              ]
+            }
+          }
+        },
+        {
+          "name": "AddThirdImage",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Response must contain status code 201 and json data\", function () {\r",
+                  "pm.response.to.be.status(201);\r",
+                  "pm.response.to.be.withBody;\r",
+                  "pm.response.to.be.json;\r",
+                  "});\r",
+                  "const target = pm.response.json();\r",
+                  "pm.test(\"Response must contain fields: id, title, type, data\", function () {\r",
+                  "pm.expect(target).to.have.property('id');\r",
+                  "pm.expect(target).to.have.property('title');\r",
+                  "pm.expect(target).to.have.property('type');\r",
+                  "pm.expect(target).to.have.property('data');\r",
+                  "});\r",
+                  "pm.test(\"Response data should not be null\", function () {\r",
+                  "var jsonData = pm.response.json();\r",
+                  "pm.expect(target.id).to.eql(3);\r",
+                  "pm.expect(target.title).to.not.be.null;\r",
+                  "pm.expect(target.type).to.not.be.null;\r",
+                  "pm.expect(target.data).to.not.be.null;\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              },
+              {
+                "key": "Authorization",
+                "value": "Basic YWRtaW46MTIz"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "description": "testFile",
+                  "type": "file",
+                  "src": "{{fileName3}}"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/images",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "images"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GetImage",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Response must contain code status 200 and json data\", function () {\r",
+                  "pm.response.to.be.status(200);\r",
+                  "pm.response.to.be.withBody;\r",
+                  "pm.response.to.be.json;\r",
+                  "});\r",
+                  "const target = pm.response.json();\r",
+                  "pm.test(\"Response must contain fields: id, title, type, link\", function () {\r",
+                  "pm.expect(target).to.have.property('id');\r",
+                  "pm.expect(target).to.have.property('title');\r",
+                  "pm.expect(target).to.have.property('type');\r",
+                  "pm.expect(target).to.have.property('link');\r",
+                  "});\r",
+                  "pm.test(\"Response data should be eql file data\", function () {\r",
+                  "var jsonData = pm.response.json();\r",
+                  "pm.expect(jsonData.id).to.eql(2);\r",
+                  "pm.expect(target.title).to.not.be.null;\r",
+                  "pm.expect(target.type).to.not.be.null;\r",
+                  "pm.expect(target.link).to.not.be.null;\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*"
+              },
+              {
+                "key": "Authorization",
+                "value": "Basic YWRtaW46MTIz"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/images/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "images",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "2",
+                  "description": "(Required) "
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "GetAllImages",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Response must contain code status 200 and json data\", function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200]);",
+                  "});",
+                  "pm.test(\"Response data should be eql file data\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.length, 'images count in total').to.eql(3);",
+                  "",
+                  "    pm.expect(jsonData[0].id, 'result[0]: \"id\" field').to.eql(1);",
+                  "    pm.expect(jsonData[0].title, 'result[0]: \"title\" field').to.not.be.null;",
+                  "    pm.expect(jsonData[0].type, 'result[0]: \"type\" field').to.not.be.null;",
+                  "    pm.expect(jsonData[0].link, 'result[0]: \"link\" field').to.not.be.null;",
+                  "",
+                  "    pm.expect(jsonData[1].id, 'result[1]: \"id\" field').to.eql(2);",
+                  "    pm.expect(jsonData[1].title, 'result[1]: \"title\" field').to.not.be.null;",
+                  "    pm.expect(jsonData[1].type, 'result[1]: \"type\" field').to.not.be.null;",
+                  "    pm.expect(jsonData[1].link, 'result[1]: \"link\" field').to.not.be.null;",
+                  "",
+                  "    pm.expect(jsonData[2].id, 'result[2]: \"id\" field').to.eql(3);",
+                  "    pm.expect(jsonData[2].title, 'result[2]: \"title\" field').to.not.be.null;",
+                  "    pm.expect(jsonData[2].type, 'result[2]: \"type\" field').to.not.be.null;",
+                  "    pm.expect(jsonData[2].link, 'result[2]: \"link\" field').to.not.be.null;",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Basic YWRtaW46MTIz"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/images",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "images"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DeleteImage",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Response must contain status code 204\", function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([204]);",
+                  "});",
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/images/:imageId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "images",
+                ":imageId"
+              ],
+              "variable": [
+                {
+                  "key": "imageId",
+                  "value": "2"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GetImageNotFound",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Response must contain status code 404\", function () {\r",
+                  "pm.response.to.be.status(404);\r",
+                  "pm.response.to.be.withBody;\r",
+                  "pm.response.to.be.json;\r",
+                  "});\r",
+                  "const target = pm.response.json();\r",
+                  "pm.test(\"Response must contain fields: message\", function () {\r",
+                  "pm.expect(target).to.have.property('message');\r",
+                  "});\r",
+                  "pm.test(\"Response data should be eql exception data\", function () {\r",
+                  "var jsonData = pm.response.json();\r",
+                  "pm.expect(jsonData.message).to.eql('Image with id 2 not found');\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*"
+              },
+              {
+                "key": "Authorization",
+                "value": "Basic YWRtaW46MTIz"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/images/:imageId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "images",
+                ":imageId"
+              ],
+              "variable": [
+                {
+                  "key": "imageId",
+                  "value": "2",
+                  "description": "(Required) "
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "AddFourthImage",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Response must contain code status 201 and json data\", function () {\r",
+                  "pm.response.to.be.status(201);\r",
+                  "pm.response.to.be.withBody;\r",
+                  "pm.response.to.be.json;\r",
+                  "});\r",
+                  "const target = pm.response.json();\r",
+                  "pm.test(\"Response must contain fields: id, title, type, data\", function () {\r",
+                  "pm.expect(target).to.have.property('id');\r",
+                  "pm.expect(target).to.have.property('title');\r",
+                  "pm.expect(target).to.have.property('type');\r",
+                  "pm.expect(target).to.have.property('data');\r",
+                  "});\r",
+                  "pm.test(\"Response data should not be null\", function () {\r",
+                  "var jsonData = pm.response.json();\r",
+                  "pm.expect(target.id).to.eql(4);\r",
+                  "pm.expect(target.title).to.not.be.null;\r",
+                  "pm.expect(target.type).to.not.be.null;\r",
+                  "pm.expect(target.data).to.not.be.null;\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              },
+              {
+                "key": "Authorization",
+                "value": "Basic YWRtaW46MTIz"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "description": "testFile",
+                  "type": "file",
+                  "src": "{{fileName4}}"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/images",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "images"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GetAllImagesAfterDeleteSecond",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Response must contain status code 200\", function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200]);",
+                  "});",
+                  "pm.test(\"Response data should be eql file data\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.length, 'images count in total').to.eql(3);",
+                  "",
+                  "    pm.expect(jsonData[0].id, 'result[0]: \"id\" field').to.eql(1);",
+                  "    pm.expect(jsonData[0].title, 'result[0]: \"title\" field').to.not.be.null;",
+                  "    pm.expect(jsonData[0].type, 'result[0]: \"type\" field').to.not.be.null;",
+                  "    pm.expect(jsonData[0].link, 'result[0]: \"link\" field').to.not.be.null;",
+                  "",
+                  "    pm.expect(jsonData[1].id, 'result[1]: \"id\" field').to.eql(3);",
+                  "    pm.expect(jsonData[1].title, 'result[1]: \"title\" field').to.not.be.null;",
+                  "    pm.expect(jsonData[1].type, 'result[1]: \"type\" field').to.not.be.null;",
+                  "    pm.expect(jsonData[1].link, 'result[1]: \"link\" field').to.not.be.null;",
+                  "",
+                  "    pm.expect(jsonData[2].id, 'result[2]: \"id\" field').to.eql(4);",
+                  "    pm.expect(jsonData[2].title, 'result[2]: \"title\" field').to.not.be.null;",
+                  "    pm.expect(jsonData[2].type, 'result[2]: \"type\" field').to.not.be.null;",
+                  "    pm.expect(jsonData[2].link, 'result[2]: \"link\" field').to.not.be.null;",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Basic YWRtaW46MTIz"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/images",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "images"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "users",
+      "item": [
+        {
+          "name": "AddFirstUser",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Response must contain status code 201 and json data\", function () {\r",
+                  "pm.response.to.be.status(201);\r",
+                  "pm.response.to.be.withBody;\r",
+                  "pm.response.to.be.json;\r",
+                  "});\r",
+                  "const source = JSON.parse(pm.request.body.raw);\r",
+                  "const target = pm.response.json();\r",
+                  "pm.test(\"Response must contain fields: id, name, lastName, surName, birthday\", function () {\r",
+                  "pm.expect(target).to.have.property('id');\r",
+                  "pm.expect(target).to.have.property('name');\r",
+                  "pm.expect(target).to.have.property('lastName');\r",
+                  "pm.expect(target).to.have.property('surName');\r",
+                  "pm.expect(target).to.have.property('birthday');\r",
+                  "});\r",
+                  "pm.test(\"Response data should be eql request data\", function () {\r",
+                  "var jsonData = pm.response.json();\r",
+                  "pm.expect(target.id).to.eql(1);\r",
+                  "pm.expect(jsonData.name).to.eql('John');\r",
+                  "pm.expect(jsonData.lastName).to.eql('Malkovich');\r",
+                  "pm.expect(jsonData.surName).to.eql('Johnson');\r",
+                  "pm.expect(jsonData.birthday).to.eql('1946-08-20');\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              },
+              {
+                "key": "Authorization",
+                "value": "Basic YWRtaW46MTIz"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"John\",\n  \"lastName\": \"Malkovich\",\n  \"surName\": \"Johnson\",\n  \"birthday\": \"1946-08-20\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/users",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users"
+              ]
+            }
+          }
+        },
+        {
+          "name": "AddSecondUser",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Response must contain status code 201 and json data\", function () {\r",
+                  "pm.response.to.be.status(201);\r",
+                  "pm.response.to.be.withBody;\r",
+                  "pm.response.to.be.json;\r",
+                  "});\r",
+                  "const source = JSON.parse(pm.request.body.raw);\r",
+                  "const target = pm.response.json();\r",
+                  "pm.test(\"Response must contain fields: id, name, lastName, surName, birthday\", function () {\r",
+                  "pm.expect(target).to.have.property('id');\r",
+                  "pm.expect(target).to.have.property('name');\r",
+                  "pm.expect(target).to.have.property('lastName');\r",
+                  "pm.expect(target).to.have.property('surName');\r",
+                  "pm.expect(target).to.have.property('birthday');\r",
+                  "});\r",
+                  "pm.test(\"Response data should be eql request data\", function () {\r",
+                  "var jsonData = pm.response.json();\r",
+                  "pm.expect(target.id).to.eql(2);\r",
+                  "pm.expect(jsonData.name).to.eql('Kirk');\r",
+                  "pm.expect(jsonData.lastName).to.eql('Duglas');\r",
+                  "pm.expect(jsonData.surName).to.eql('Marry');\r",
+                  "pm.expect(jsonData.birthday).to.eql('1989-11-03');\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              },
+              {
+                "key": "Authorization",
+                "value": "Basic YWRtaW46MTIz"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Kirk\",\n  \"lastName\": \"Duglas\",\n  \"surName\": \"Marry\",\n  \"birthday\": \"1989-11-03\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/users",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users"
+              ]
+            }
+          }
+        },
+        {
+          "name": "AddThirdUser",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Response must contain status code 201 and json data\", function () {\r",
+                  "pm.response.to.be.status(201);\r",
+                  "pm.response.to.be.withBody;\r",
+                  "pm.response.to.be.json;\r",
+                  "});\r",
+                  "const source = JSON.parse(pm.request.body.raw);\r",
+                  "const target = pm.response.json();\r",
+                  "pm.test(\"Response must contain fields: id, name, lastName, surName, birthday\", function () {\r",
+                  "pm.expect(target).to.have.property('id');\r",
+                  "pm.expect(target).to.have.property('name');\r",
+                  "pm.expect(target).to.have.property('lastName');\r",
+                  "pm.expect(target).to.have.property('surName');\r",
+                  "pm.expect(target).to.have.property('birthday');\r",
+                  "});\r",
+                  "pm.test(\"Response data should be eql request data\", function () {\r",
+                  "var jsonData = pm.response.json();\r",
+                  "pm.expect(target.id).to.eql(3);\r",
+                  "pm.expect(jsonData.name).to.eql('Timmy');\r",
+                  "pm.expect(jsonData.lastName).to.eql('Mophet');\r",
+                  "pm.expect(jsonData.surName).to.eql('June');\r",
+                  "pm.expect(jsonData.birthday).to.eql('2013-04-13');\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              },
+              {
+                "key": "Authorization",
+                "value": "Basic YWRtaW46MTIz"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Timmy\",\n  \"lastName\": \"Mophet\",\n  \"surName\": \"June\",\n  \"birthday\": \"2013-04-13\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/users",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GetUser",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Response must contain status code 200 and json data\", function () {\r",
+                  "pm.response.to.be.status(200);\r",
+                  "pm.response.to.be.withBody;\r",
+                  "pm.response.to.be.json;\r",
+                  "});\r",
+                  "const target = pm.response.json();\r",
+                  "pm.test(\"Response must contain fields: id, name, lastName, surName, birthday\", function () {\r",
+                  "pm.expect(target).to.have.property('id');\r",
+                  "pm.expect(target).to.have.property('name');\r",
+                  "pm.expect(target).to.have.property('lastName');\r",
+                  "pm.expect(target).to.have.property('surName');\r",
+                  "pm.expect(target).to.have.property('birthday');\r",
+                  "});\r",
+                  "pm.test(\"Response data should be eql request data\", function () {\r",
+                  "    var jsonData = pm.response.json();\r",
+                  "    pm.expect(jsonData.id).to.eql(1);\r",
+                  "    pm.expect(jsonData.name).to.eql('John');\r",
+                  "    pm.expect(jsonData.lastName).to.eql('Malkovich');\r",
+                  "    pm.expect(jsonData.surName).to.eql('Johnson');    \r",
+                  "    pm.expect(jsonData.birthday).to.eql('1946-08-20');\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*"
+              },
+              {
+                "key": "Authorization",
+                "value": "Basic YWRtaW46MTIz"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/users/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1",
+                  "description": "(Required) "
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "GetAllUsers",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Response must contain code status 200 and json data\", function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200]);",
+                  "});",
+                  "pm.test(\"Response data should be eql file data\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.length, 'users count in total').to.eql(3);",
+                  "",
+                  "    pm.expect(jsonData[0].id, 'result[0]: \"id\" field').to.eql(1);",
+                  "    pm.expect(jsonData[0].name, 'result[0]: \"name\" field').to.eql('John');",
+                  "    pm.expect(jsonData[0].lastName, 'result[0]: \"lastName\" field').to.eql('Malkovich');",
+                  "    pm.expect(jsonData[0].surName, 'result[0]: \"surName\" field').to.eql('Johnson');",
+                  "    pm.expect(jsonData[0].birthday, 'result[0]: \"birthday\" field').to.eql('1946-08-20');",
+                  "",
+                  "    pm.expect(jsonData[1].id, 'result[1]: \"id\" field').to.eql(2);",
+                  "    pm.expect(jsonData[1].name, 'result[1]: \"name\" field').to.eql('Kirk');",
+                  "    pm.expect(jsonData[1].lastName, 'result[1]: \"lastName\" field').to.eql('Duglas');",
+                  "    pm.expect(jsonData[1].surName, 'result[1]: \"surName\" field').to.eql('Marry');",
+                  "    pm.expect(jsonData[1].birthday, 'result[1]: \"birthday\" field').to.eql('1989-11-03');",
+                  "",
+                  "    pm.expect(jsonData[2].id, 'result[2]: \"id\" field').to.eql(3);",
+                  "    pm.expect(jsonData[2].name, 'result[2]: \"name\" field').to.eql('Timmy');",
+                  "    pm.expect(jsonData[2].lastName, 'result[2]: \"lastName\" field').to.eql('Mophet');",
+                  "    pm.expect(jsonData[2].surName, 'result[2]: \"surName\" field').to.eql('June');",
+                  "    pm.expect(jsonData[2].birthday, 'result[2]: \"birthday\" field').to.eql('2013-04-13');",
+                  "",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Basic YWRtaW46MTIz"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/users",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DeleteUser",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Response must contain status code 204\", function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([204]);",
+                  "});",
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/users/:userId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users",
+                ":userId"
+              ],
+              "variable": [
+                {
+                  "key": "userId",
+                  "value": "2"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GetUserNotFound",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Response must contain status code 404\", function () {\r",
+                  "pm.response.to.be.status(404);\r",
+                  "pm.response.to.be.withBody;\r",
+                  "pm.response.to.be.json;\r",
+                  "});\r",
+                  "const target = pm.response.json();\r",
+                  "pm.test(\"Response must contain fields: message\", function () {\r",
+                  "pm.expect(target).to.have.property('message');\r",
+                  "});\r",
+                  "pm.test(\"Response data should be eql exception data\", function () {\r",
+                  "var jsonData = pm.response.json();\r",
+                  "pm.expect(jsonData.message).to.eql('User with id 2 not found');\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*"
+              },
+              {
+                "key": "Authorization",
+                "value": "Basic YWRtaW46MTIz"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/users/:userId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users",
+                ":userId"
+              ],
+              "variable": [
+                {
+                  "key": "userId",
+                  "value": "2",
+                  "description": "(Required)"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "AddFourthUser",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Response must contain status code 201 and json data\", function () {\r",
+                  "pm.response.to.be.status(201);\r",
+                  "pm.response.to.be.withBody;\r",
+                  "pm.response.to.be.json;\r",
+                  "});\r",
+                  "const source = JSON.parse(pm.request.body.raw);\r",
+                  "const target = pm.response.json();\r",
+                  "pm.test(\"Response must contain fields: id, name, lastName, surName, birthday\", function () {\r",
+                  "pm.expect(target).to.have.property('id');\r",
+                  "pm.expect(target).to.have.property('name');\r",
+                  "pm.expect(target).to.have.property('lastName');\r",
+                  "pm.expect(target).to.have.property('surName');\r",
+                  "pm.expect(target).to.have.property('birthday');\r",
+                  "});\r",
+                  "pm.test(\"Response data should be eql request data\", function () {\r",
+                  "var jsonData = pm.response.json();\r",
+                  "pm.expect(target.id).to.eql(4);\r",
+                  "pm.expect(jsonData.name).to.eql('Piter');\r",
+                  "pm.expect(jsonData.lastName).to.eql('Peterson');\r",
+                  "pm.expect(jsonData.surName).to.eql('McMuffin');\r",
+                  "pm.expect(jsonData.birthday).to.eql('1989-07-22');\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              },
+              {
+                "key": "Authorization",
+                "value": "Basic YWRtaW46MTIz"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Piter\",\n  \"lastName\": \"Peterson\",\n  \"surName\": \"McMuffin\",\n  \"birthday\": \"1989-07-22\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/users",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users"
+              ]
+            }
+          }
+        },
+        {
+          "name": "UpdateFirstUser",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Response must contain status code 200 and json data\", function () {\r",
+                  "pm.response.to.be.status(200);\r",
+                  "pm.response.to.be.withBody;\r",
+                  "pm.response.to.be.json;\r",
+                  "});\r",
+                  "const source = JSON.parse(pm.request.body.raw);\r",
+                  "const target = pm.response.json();\r",
+                  "pm.test(\"Response must contain fields: id, name, lastName, surName, birthday, image\", function () {\r",
+                  "pm.expect(target).to.have.property('id');\r",
+                  "pm.expect(target).to.have.property('name');\r",
+                  "pm.expect(target).to.have.property('lastName');\r",
+                  "pm.expect(target).to.have.property('surName');\r",
+                  "pm.expect(target).to.have.property('birthday');\r",
+                  "pm.expect(target).to.have.property('image');\r",
+                  "});\r",
+                  "pm.test(\"Response data should be eql request data\", function () {\r",
+                  "var jsonData = pm.response.json();\r",
+                  "pm.expect(target.id).to.eql(1);\r",
+                  "pm.expect(jsonData.name).to.eql('Joshua');\r",
+                  "pm.expect(jsonData.lastName).to.eql('Anker');\r",
+                  "pm.expect(jsonData.surName).to.eql('Flop');\r",
+                  "pm.expect(jsonData.birthday).to.eql('1981-05-24');\r",
+                  "pm.expect(jsonData.image.id).to.eql(1);\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Basic YWRtaW46MTIz"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Joshua\",\n  \"lastName\": \"Anker\",\n  \"surName\": \"Flop\",\n  \"birthday\": \"1981-05-24\", \n  \"image\": \"1\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/users/:userId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users",
+                ":userId"
+              ],
+              "variable": [
+                {
+                  "key": "userId",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "UpdateThirdUser",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Response must contain status code 200 and json data\", function () {\r",
+                  "pm.response.to.be.status(200);\r",
+                  "pm.response.to.be.withBody;\r",
+                  "pm.response.to.be.json;\r",
+                  "});\r",
+                  "const source = JSON.parse(pm.request.body.raw);\r",
+                  "const target = pm.response.json();\r",
+                  "pm.test(\"Response must contain fields: id, name, lastName, surName, birthday, image\", function () {\r",
+                  "pm.expect(target).to.have.property('id');\r",
+                  "pm.expect(target).to.have.property('name');\r",
+                  "pm.expect(target).to.have.property('lastName');\r",
+                  "pm.expect(target).to.have.property('surName');\r",
+                  "pm.expect(target).to.have.property('birthday');\r",
+                  "pm.expect(target).to.have.property('image');\r",
+                  "});\r",
+                  "pm.test(\"Response data should be eql request data\", function () {\r",
+                  "var jsonData = pm.response.json();\r",
+                  "pm.expect(target.id).to.eql(3);\r",
+                  "pm.expect(jsonData.name).to.eql('Stepan');\r",
+                  "pm.expect(jsonData.lastName).to.eql('Volkov');\r",
+                  "pm.expect(jsonData.surName).to.eql('Andreevich');\r",
+                  "pm.expect(jsonData.birthday).to.eql('1972-03-18');\r",
+                  "pm.expect(jsonData.image.id).to.eql(4);\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Basic YWRtaW46MTIz"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Stepan\",\n  \"lastName\": \"Volkov\",\n  \"surName\": \"Andreevich\",\n  \"birthday\": \"1972-03-18\", \n  \"image\": \"4\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/users/:userId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users",
+                ":userId"
+              ],
+              "variable": [
+                {
+                  "key": "userId",
+                  "value": "3"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "UpdateFourthUser",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Response must contain status code 200 and json data\", function () {\r",
+                  "pm.response.to.be.status(200);\r",
+                  "pm.response.to.be.withBody;\r",
+                  "pm.response.to.be.json;\r",
+                  "});\r",
+                  "const source = JSON.parse(pm.request.body.raw);\r",
+                  "const target = pm.response.json();\r",
+                  "pm.test(\"Response must contain fields: id, name, lastName, surName, birthday, image\", function () {\r",
+                  "pm.expect(target).to.have.property('id');\r",
+                  "pm.expect(target).to.have.property('name');\r",
+                  "pm.expect(target).to.have.property('lastName');\r",
+                  "pm.expect(target).to.have.property('surName');\r",
+                  "pm.expect(target).to.have.property('birthday');\r",
+                  "pm.expect(target).to.have.property('image');\r",
+                  "});\r",
+                  "pm.test(\"Response data should be eql request data\", function () {\r",
+                  "var jsonData = pm.response.json();\r",
+                  "pm.expect(target.id).to.eql(4);\r",
+                  "pm.expect(jsonData.name).to.eql('Anna');\r",
+                  "pm.expect(jsonData.lastName).to.eql('Matew');\r",
+                  "pm.expect(jsonData.surName).to.eql('Mappet');\r",
+                  "pm.expect(jsonData.birthday).to.eql('1994-11-14');\r",
+                  "pm.expect(jsonData.image.id).to.eql(3);\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Basic YWRtaW46MTIz"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Anna\",\n  \"lastName\": \"Matew\",\n  \"surName\": \"Mappet\",\n  \"birthday\": \"1994-11-14\", \n  \"image\": \"3\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/users/:userId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users",
+                ":userId"
+              ],
+              "variable": [
+                {
+                  "key": "userId",
+                  "value": "4"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "UpdateFourthUserWithImageNotFound",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Response must contain status code 404\", function () {\r",
+                  "pm.response.to.be.status(404);\r",
+                  "pm.response.to.be.withBody;\r",
+                  "pm.response.to.be.json;\r",
+                  "});\r",
+                  "const source = JSON.parse(pm.request.body.raw);\r",
+                  "const target = pm.response.json();\r",
+                  "pm.test(\"Response must contain fields: message\", function () {\r",
+                  "pm.expect(target).to.have.property('message');\r",
+                  "});\r",
+                  "pm.test(\"Response data should be eql exception data\", function () {\r",
+                  "var jsonData = pm.response.json();\r",
+                  "pm.expect(jsonData.message).to.eql('Image with id 12 not found');\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Basic YWRtaW46MTIz"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Anna\",\n  \"lastName\": \"Matew\",\n  \"surName\": \"Mappet\",\n  \"birthday\": \"1994-11-14\", \n  \"image\": \"12\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/users/:userId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users",
+                ":userId"
+              ],
+              "variable": [
+                {
+                  "key": "userId",
+                  "value": "4"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "UpdateUserWithUserNotFound",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Response must contain status code 404\", function () {\r",
+                  "pm.response.to.be.status(404);\r",
+                  "pm.response.to.be.withBody;\r",
+                  "pm.response.to.be.json;\r",
+                  "});\r",
+                  "const source = JSON.parse(pm.request.body.raw);\r",
+                  "const target = pm.response.json();\r",
+                  "pm.test(\"Response must contain fields: message\", function () {\r",
+                  "pm.expect(target).to.have.property('message');\r",
+                  "});\r",
+                  "pm.test(\"Response data should be eql exception data\", function () {\r",
+                  "var jsonData = pm.response.json();\r",
+                  "pm.expect(jsonData.message).to.eql('User with id 15 not found');\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Basic YWRtaW46MTIz"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Anna\",\n  \"lastName\": \"Matew\",\n  \"surName\": \"Mappet\",\n  \"birthday\": \"1994-11-14\", \n  \"image\": \"1\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/users/:userId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users",
+                ":userId"
+              ],
+              "variable": [
+                {
+                  "key": "userId",
+                  "value": "15"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DeleteUserWithImage",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Response must contain status code 204\", function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([204]);",
+                  "});",
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/users/:userId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users",
+                ":userId"
+              ],
+              "variable": [
+                {
+                  "key": "userId",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "AddFifthUser",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Response must contain status code 201 and json data\", function () {\r",
+                  "pm.response.to.be.status(201);\r",
+                  "pm.response.to.be.withBody;\r",
+                  "pm.response.to.be.json;\r",
+                  "});\r",
+                  "const source = JSON.parse(pm.request.body.raw);\r",
+                  "const target = pm.response.json();\r",
+                  "pm.test(\"Response must contain fields: id, name, lastName, surName, birthday\", function () {\r",
+                  "pm.expect(target).to.have.property('id');\r",
+                  "pm.expect(target).to.have.property('name');\r",
+                  "pm.expect(target).to.have.property('lastName');\r",
+                  "pm.expect(target).to.have.property('surName');\r",
+                  "pm.expect(target).to.have.property('birthday');\r",
+                  "});\r",
+                  "pm.test(\"Response data should be eql request data\", function () {\r",
+                  "var jsonData = pm.response.json();\r",
+                  "pm.expect(target.id).to.eql(5);\r",
+                  "pm.expect(jsonData.name).to.eql('Greg');\r",
+                  "pm.expect(jsonData.lastName).to.eql('Bennet');\r",
+                  "pm.expect(jsonData.surName).to.eql('Ostinato');\r",
+                  "pm.expect(jsonData.birthday).to.eql('1977-02-14');\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              },
+              {
+                "key": "Authorization",
+                "value": "Basic YWRtaW46MTIz"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Greg\",\n  \"lastName\": \"Bennet\",\n  \"surName\": \"Ostinato\",\n  \"birthday\": \"1977-02-14\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/users",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users"
+              ]
+            }
+          }
+        },
+        {
+          "name": "DeleteImageInUse",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Response must contain status code 409\", function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([409]);",
+                  "});",
+                  "const target = pm.response.json();\r",
+                  "pm.test(\"Response must contain fields: message\", function () {\r",
+                  "pm.expect(target).to.have.property('message');\r",
+                  "});\r",
+                  "pm.test(\"Response data should be eql exception data\", function () {\r",
+                  "var jsonData = pm.response.json();\r",
+                  "pm.expect(jsonData.message).to.eql('Image with id 3 still in use');\r",
+                  "});",
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/images/:imageId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "images",
+                ":imageId"
+              ],
+              "variable": [
+                {
+                  "key": "imageId",
+                  "value": "3"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GetAllUsersAfterUpdate",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Response must contain code status 200 and json data\", function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200]);",
+                  "});",
+                  "pm.test(\"Response data should be eql file data\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.length, 'users count in total').to.eql(3);",
+                  "",
+                  "    pm.expect(jsonData[0].id, 'result[0]: \"id\" field').to.eql(3);",
+                  "    pm.expect(jsonData[0].name, 'result[0]: \"name\" field').to.eql('Stepan');",
+                  "    pm.expect(jsonData[0].lastName, 'result[0]: \"lastName\" field').to.eql('Volkov');",
+                  "    pm.expect(jsonData[0].surName, 'result[0]: \"surName\" field').to.eql('Andreevich');",
+                  "    pm.expect(jsonData[0].birthday, 'result[0]: \"birthday\" field').to.eql('1972-03-18');",
+                  "    pm.expect(jsonData[0].image.id, 'result[0]: \"image.id\" field').to.eql(4);",
+                  "",
+                  "    pm.expect(jsonData[1].id, 'result[1]: \"id\" field').to.eql(4);",
+                  "    pm.expect(jsonData[1].name, 'result[1]: \"name\" field').to.eql('Anna');",
+                  "    pm.expect(jsonData[1].lastName, 'result[1]: \"lastName\" field').to.eql('Matew');",
+                  "    pm.expect(jsonData[1].surName, 'result[1]: \"surName\" field').to.eql('Mappet');",
+                  "    pm.expect(jsonData[1].birthday, 'result[1]: \"birthday\" field').to.eql('1994-11-14');",
+                  "    pm.expect(jsonData[1].image.id, 'result[1]: \"image.id\" field').to.eql(3);",
+                  "",
+                  "    pm.expect(jsonData[2].id, 'result[2]: \"id\" field').to.eql(5);",
+                  "    pm.expect(jsonData[2].name, 'result[2]: \"name\" field').to.eql('Greg');",
+                  "    pm.expect(jsonData[2].lastName, 'result[2]: \"lastName\" field').to.eql('Bennet');",
+                  "    pm.expect(jsonData[2].surName, 'result[2]: \"surName\" field').to.eql('Ostinato');",
+                  "    pm.expect(jsonData[2].birthday, 'result[2]: \"birthday\" field').to.eql('1977-02-14');",
+                  "",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Basic YWRtaW46MTIz"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/users",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "contactInfo",
+      "item": [
+      {
+        "name": "AddContactInfo",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Response must contain status code 201 and json data\", function () {\r",
+                      "pm.response.to.be.status(201);\r",
+                      "pm.response.to.be.withBody;\r",
+                      "pm.response.to.be.json;\r",
+                      "});\r",
+                      "const source = JSON.parse(pm.request.body.raw);\r",
+                      "const target = pm.response.json();\r",
+                      "pm.test(\"Response must contain fields: id, email, phone, user\", function () {\r",
+                      "pm.expect(target).to.have.property('id');\r",
+                      "pm.expect(target).to.have.property('email');\r",
+                      "pm.expect(target).to.have.property('phone');\r",
+                      "pm.expect(target).to.have.property('user');\r",
+                      "});\r",
+                      "pm.test(\"Response data should be eql request data\", function () {\r",
+                      "var jsonData = pm.response.json();\r",
+                      "pm.expect(target.id).to.eql(1);\r",
+                      "pm.expect(jsonData.email).to.eql('step22@mail.ru');\r",
+                      "pm.expect(jsonData.phone).to.eql('+98884556374');\r",
+                      "pm.expect(jsonData.user.id).to.eql(5);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+        "request": {
+          "method": "POST",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Accept",
+              "value": "*/*"
+            },
+            {
+              "key": "Authorization",
+              "value": "Basic YWRtaW46MTIz"
+            }
+          ],
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"email\": \"step22@mail.ru\",\n  \"phone\": \"+98884556374\",\n   \"user\": \"5\"\n}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          },
+          "url": {
+            "raw": "{{baseUrl}}/info",
+            "host": [
+              "{{baseUrl}}"
+            ],
+            "path": [
+              "info"
+            ]
+          }
+        }
+      },
+      {
+        "name": "GetContactInfo",
+        "event": [
+          {
+            "listen": "test",
+            "script": {
+              "exec": [
+                "pm.test(\"Response must contain status code 200 and json data\", function () {\r",
+                "pm.response.to.be.status(200);\r",
+                "pm.response.to.be.withBody;\r",
+                "pm.response.to.be.json;\r",
+                "});\r",
+                "const target = pm.response.json();\r",
+                "pm.test(\"Response must contain fields: id, email, phone, user\", function () {\r",
+                "pm.expect(target).to.have.property('id');\r",
+                "pm.expect(target).to.have.property('email');\r",
+                "pm.expect(target).to.have.property('phone');\r",
+                "pm.expect(target).to.have.property('user');\r",
+                "});\r",
+                "pm.test(\"Response data should be eql request data\", function () {\r",
+                "    var jsonData = pm.response.json();\r",
+                "    pm.expect(jsonData.id).to.eql(1);\r",
+                "    pm.expect(jsonData.email).to.eql('step22@mail.ru');\r",
+                "    pm.expect(jsonData.phone).to.eql('+98884556374');\r",
+                "    pm.expect(jsonData.user.id).to.eql(5);\r",
+                "});"
+              ],
+              "type": "text/javascript"
+            }
+          }
+        ],
+        "request": {
+          "method": "GET",
+          "header": [
+            {
+              "key": "Accept",
+              "value": "*/*"
+            },
+            {
+              "key": "Authorization",
+              "value": "Basic YWRtaW46MTIz"
+            }
+          ],
+          "url": {
+            "raw": "{{baseUrl}}/info/:infoId",
+            "host": [
+              "{{baseUrl}}"
+            ],
+            "path": [
+              "info",
+              ":infoId"
+            ],
+            "variable": [
+              {
+                "key": "infoId",
+                "value": "1",
+                "description": "(Required) "
+              }
+            ]
+          }
+        }
+      },
+      {
+        "name": "UpdateFifthUser",
+        "event": [
+          {
+            "listen": "test",
+            "script": {
+              "exec": [
+                "pm.test(\"Response must contain status code 200 and json data\", function () {\r",
+                "pm.response.to.be.status(200);\r",
+                "pm.response.to.be.withBody;\r",
+                "pm.response.to.be.json;\r",
+                "});\r",
+                "const source = JSON.parse(pm.request.body.raw);\r",
+                "const target = pm.response.json();\r",
+                "pm.test(\"Response must contain fields: id, name, lastName, surName, birthday, image\", function () {\r",
+                "pm.expect(target).to.have.property('id');\r",
+                "pm.expect(target).to.have.property('name');\r",
+                "pm.expect(target).to.have.property('lastName');\r",
+                "pm.expect(target).to.have.property('surName');\r",
+                "pm.expect(target).to.have.property('birthday');\r",
+                "pm.expect(target).to.have.property('image');\r",
+                "});\r",
+                "pm.test(\"Response data should be eql request data\", function () {\r",
+                "var jsonData = pm.response.json();\r",
+                "pm.expect(target.id).to.eql(5);\r",
+                "pm.expect(jsonData.name).to.eql('Mike');\r",
+                "pm.expect(jsonData.lastName).to.eql('Scaly');\r",
+                "pm.expect(jsonData.surName).to.eql('Bobbins');\r",
+                "pm.expect(jsonData.birthday).to.eql('1944-03-01');\r",
+                "pm.expect(jsonData.image.id).to.eql(1);\r",
+                "});"
+              ],
+              "type": "text/javascript"
+            }
+          }
+        ],
+        "request": {
+          "method": "PATCH",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json",
+              "type": "text"
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "type": "text"
+            },
+            {
+              "key": "Authorization",
+              "value": "Basic YWRtaW46MTIz"
+            }
+          ],
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"name\": \"Mike\",\n  \"lastName\": \"Scaly\",\n  \"surName\": \"Bobbins\",\n  \"birthday\": \"1944-03-01\", \n  \"image\": \"1\"\n}"
+          },
+          "url": {
+            "raw": "{{baseUrl}}/users/:userId",
+            "host": [
+              "{{baseUrl}}"
+            ],
+            "path": [
+              "users",
+              ":userId"
+            ],
+            "variable": [
+              {
+                "key": "userId",
+                "value": "5"
+              }
+            ]
+          }
+        },
+        "response": []
+      },
+      {
+        "name": "GetContactInfo",
+        "event": [
+          {
+            "listen": "test",
+            "script": {
+              "exec": [
+                "pm.test(\"Response must contain status code 200 and json data\", function () {\r",
+                "pm.response.to.be.status(200);\r",
+                "pm.response.to.be.withBody;\r",
+                "pm.response.to.be.json;\r",
+                "});\r",
+                "const target = pm.response.json();\r",
+                "pm.test(\"Response must contain fields: id, email, phone, user\", function () {\r",
+                "pm.expect(target).to.have.property('id');\r",
+                "pm.expect(target).to.have.property('email');\r",
+                "pm.expect(target).to.have.property('phone');\r",
+                "pm.expect(target).to.have.property('user');\r",
+                "});\r",
+                "pm.test(\"Response data should be eql request data\", function () {\r",
+                "    var jsonData = pm.response.json();\r",
+                "    pm.expect(jsonData.id).to.eql(1);\r",
+                "    pm.expect(jsonData.email).to.eql('step22@mail.ru');\r",
+                "    pm.expect(jsonData.phone).to.eql('+98884556374');\r",
+                "    pm.expect(jsonData.user.id).to.eql(5);\r",
+                "});"
+              ],
+              "type": "text/javascript"
+            }
+          }
+        ],
+        "request": {
+          "method": "GET",
+          "header": [
+            {
+              "key": "Accept",
+              "value": "*/*"
+            },
+            {
+              "key": "Authorization",
+              "value": "Basic YWRtaW46MTIz"
+            }
+          ],
+          "url": {
+            "raw": "{{baseUrl}}/info/:infoId",
+            "host": [
+              "{{baseUrl}}"
+            ],
+            "path": [
+              "info",
+              ":infoId"
+            ],
+            "variable": [
+              {
+                "key": "infoId",
+                "value": "1",
+                "description": "(Required) "
+              }
+            ]
+          }
+        }
+      },
+        {
+          "name": "AddSecondContactInfo",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Response must contain status code 201 and json data\", function () {\r",
+                  "pm.response.to.be.status(201);\r",
+                  "pm.response.to.be.withBody;\r",
+                  "pm.response.to.be.json;\r",
+                  "});\r",
+                  "const source = JSON.parse(pm.request.body.raw);\r",
+                  "const target = pm.response.json();\r",
+                  "pm.test(\"Response must contain fields: id, email, phone, user\", function () {\r",
+                  "pm.expect(target).to.have.property('id');\r",
+                  "pm.expect(target).to.have.property('email');\r",
+                  "pm.expect(target).to.have.property('phone');\r",
+                  "pm.expect(target).to.have.property('user');\r",
+                  "});\r",
+                  "pm.test(\"Response data should be eql request data\", function () {\r",
+                  "var jsonData = pm.response.json();\r",
+                  "pm.expect(target.id).to.eql(2);\r",
+                  "pm.expect(jsonData.email).to.eql('kroll@gmail.com');\r",
+                  "pm.expect(jsonData.phone).to.eql('+4356789989');\r",
+                  "pm.expect(jsonData.user.id).to.eql(3);\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              },
+              {
+                "key": "Authorization",
+                "value": "Basic YWRtaW46MTIz"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"kroll@gmail.com\",\n  \"phone\": \"+4356789989\",\n   \"user\": \"3\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/info",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "info"
+              ]
+            }
+          }
+        },
+        {
+          "name": "AddThirdContactInfo",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Response must contain status code 201 and json data\", function () {\r",
+                  "pm.response.to.be.status(201);\r",
+                  "pm.response.to.be.withBody;\r",
+                  "pm.response.to.be.json;\r",
+                  "});\r",
+                  "const source = JSON.parse(pm.request.body.raw);\r",
+                  "const target = pm.response.json();\r",
+                  "pm.test(\"Response must contain fields: id, email, phone, user\", function () {\r",
+                  "pm.expect(target).to.have.property('id');\r",
+                  "pm.expect(target).to.have.property('email');\r",
+                  "pm.expect(target).to.have.property('phone');\r",
+                  "pm.expect(target).to.have.property('user');\r",
+                  "});\r",
+                  "pm.test(\"Response data should be eql request data\", function () {\r",
+                  "var jsonData = pm.response.json();\r",
+                  "pm.expect(target.id).to.eql(3);\r",
+                  "pm.expect(jsonData.email).to.eql('vvvplumM@yahoo.com');\r",
+                  "pm.expect(jsonData.phone).to.eql('+79994445533');\r",
+                  "pm.expect(jsonData.user.id).to.eql(4);\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              },
+              {
+                "key": "Authorization",
+                "value": "Basic YWRtaW46MTIz"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"vvvplumM@yahoo.com\",\n  \"phone\": \"+79994445533\",\n   \"user\": \"4\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/info",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "info"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GetAllContactInfo",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Response must contain code status 200 and json data\", function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200]);",
+                  "});",
+                  "pm.test(\"Response data should be eql file data\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.length, 'info count in total').to.eql(3);",
+                  "",
+                  "    pm.expect(jsonData[0].id, 'result[0]: \"id\" field').to.eql(1);",
+                  "    pm.expect(jsonData[0].email, 'result[0]: \"email\" field').to.eql('step22@mail.ru');",
+                  "    pm.expect(jsonData[0].phone, 'result[0]: \"phone\" field').to.eql('+98884556374');",
+                  "    pm.expect(jsonData[0].user.id, 'result[0]: \"user.id\" field').to.eql(5);",
+                  "",
+                  "    pm.expect(jsonData[1].id, 'result[1]: \"id\" field').to.eql(2);",
+                  "    pm.expect(jsonData[1].email, 'result[1]: \"email\" field').to.eql('kroll@gmail.com');",
+                  "    pm.expect(jsonData[1].phone, 'result[1]: \"phone\" field').to.eql('+4356789989');",
+                  "    pm.expect(jsonData[1].user.id, 'result[1]: \"user.id\" field').to.eql(3);",
+                  "",
+                  "    pm.expect(jsonData[2].id, 'result[2]: \"id\" field').to.eql(3);",
+                  "    pm.expect(jsonData[2].email, 'result[2]: \"email\" field').to.eql('vvvplumM@yahoo.com');",
+                  "    pm.expect(jsonData[2].phone, 'result[2]: \"phone\" field').to.eql('+79994445533');",
+                  "    pm.expect(jsonData[2].user.id, 'result[2]: \"user.id\" field').to.eql(4);",
+                  "",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Basic YWRtaW46MTIz"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/info",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "info"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DeleteContactInfo",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Response must contain status code 204\", function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([204]);",
+                  "});",
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/info/:infoId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "info",
+                ":infoId"
+              ],
+              "variable": [
+                {
+                  "key": "infoId",
+                  "value": "2",
+                  "description": "(Required)"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GetContactInfoNotFound",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Response must contain status code 404\", function () {\r",
+                  "pm.response.to.be.status(404);\r",
+                  "pm.response.to.be.withBody;\r",
+                  "pm.response.to.be.json;\r",
+                  "});\r",
+                  "const target = pm.response.json();\r",
+                  "pm.test(\"Response must contain fields: message\", function () {\r",
+                  "pm.expect(target).to.have.property('message');\r",
+                  "});\r",
+                  "pm.test(\"Response data should be eql exception data\", function () {\r",
+                  "var jsonData = pm.response.json();\r",
+                  "pm.expect(jsonData.message).to.eql('Contact with id 2 not found');\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*"
+              },
+              {
+                "key": "Authorization",
+                "value": "Basic YWRtaW46MTIz"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/info/:infoId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "info",
+                ":infoId"
+              ],
+              "variable": [
+                {
+                  "key": "infoId",
+                  "value": "2",
+                  "description": "(Required)"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "AddFourthContactInfo",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Response must contain status code 201 and json data\", function () {\r",
+                  "pm.response.to.be.status(201);\r",
+                  "pm.response.to.be.withBody;\r",
+                  "pm.response.to.be.json;\r",
+                  "});\r",
+                  "const source = JSON.parse(pm.request.body.raw);\r",
+                  "const target = pm.response.json();\r",
+                  "pm.test(\"Response must contain fields: id, email, phone, user\", function () {\r",
+                  "pm.expect(target).to.have.property('id');\r",
+                  "pm.expect(target).to.have.property('email');\r",
+                  "pm.expect(target).to.have.property('phone');\r",
+                  "pm.expect(target).to.have.property('user');\r",
+                  "});\r",
+                  "pm.test(\"Response data should be eql request data\", function () {\r",
+                  "var jsonData = pm.response.json();\r",
+                  "pm.expect(target.id).to.eql(4);\r",
+                  "pm.expect(jsonData.email).to.eql('kroc1344@live.com');\r",
+                  "pm.expect(jsonData.phone).to.eql('+43232111333');\r",
+                  "pm.expect(jsonData.user.id).to.eql(3);\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              },
+              {
+                "key": "Authorization",
+                "value": "Basic YWRtaW46MTIz"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"kroc1344@live.com\",\n  \"phone\": \"+43232111333\",\n   \"user\": \"3\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/info",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "info"
+              ]
+            }
+          }
+        },
+        {
+          "name": "AddSixthUser",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Response must contain status code 201 and json data\", function () {\r",
+                  "pm.response.to.be.status(201);\r",
+                  "pm.response.to.be.withBody;\r",
+                  "pm.response.to.be.json;\r",
+                  "});\r",
+                  "const source = JSON.parse(pm.request.body.raw);\r",
+                  "const target = pm.response.json();\r",
+                  "pm.test(\"Response must contain fields: id, name, lastName, surName, birthday\", function () {\r",
+                  "pm.expect(target).to.have.property('id');\r",
+                  "pm.expect(target).to.have.property('name');\r",
+                  "pm.expect(target).to.have.property('lastName');\r",
+                  "pm.expect(target).to.have.property('surName');\r",
+                  "pm.expect(target).to.have.property('birthday');\r",
+                  "});\r",
+                  "pm.test(\"Response data should be eql request data\", function () {\r",
+                  "var jsonData = pm.response.json();\r",
+                  "pm.expect(target.id).to.eql(6);\r",
+                  "pm.expect(jsonData.name).to.eql('Ken');\r",
+                  "pm.expect(jsonData.lastName).to.eql('Lower');\r",
+                  "pm.expect(jsonData.surName).to.eql('Kristiano');\r",
+                  "pm.expect(jsonData.birthday).to.eql('1984-05-28');\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              },
+              {
+                "key": "Authorization",
+                "value": "Basic YWRtaW46MTIz"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Ken\",\n  \"lastName\": \"Lower\",\n  \"surName\": \"Kristiano\",\n  \"birthday\": \"1984-05-28\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/users",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users"
+              ]
+            }
+          }
+        },
+        {
+          "name": "AddFifthImage",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Response must contain status code 201 and json data\", function () {\r",
+                  "pm.response.to.be.status(201);\r",
+                  "pm.response.to.be.withBody;\r",
+                  "pm.response.to.be.json;\r",
+                  "});\r",
+                  "const target = pm.response.json();\r",
+                  "pm.test(\"Response must contain fields: id, title, type, data\", function () {\r",
+                  "pm.expect(target).to.have.property('id');\r",
+                  "pm.expect(target).to.have.property('title');\r",
+                  "pm.expect(target).to.have.property('type');\r",
+                  "pm.expect(target).to.have.property('data');\r",
+                  "});\r",
+                  "pm.test(\"Response data should not be null\", function () {\r",
+                  "var jsonData = pm.response.json();\r",
+                  "pm.expect(target.id).to.eql(5);\r",
+                  "pm.expect(target.title).to.not.be.null;\r",
+                  "pm.expect(target.type).to.not.be.null;\r",
+                  "pm.expect(target.data).to.not.be.null;\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              },
+              {
+                "key": "Authorization",
+                "value": "Basic YWRtaW46MTIz"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "description": "testFile",
+                  "type": "file",
+                  "src": "{{fileName2}}"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/images",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "images"
+              ]
+            }
+          }
+        },
+        {
+          "name": "UpdateFirstContactInfo",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Response must contain status code 200 and json data\", function () {\r",
+                  "pm.response.to.be.status(200);\r",
+                  "pm.response.to.be.withBody;\r",
+                  "pm.response.to.be.json;\r",
+                  "});\r",
+                  "const source = JSON.parse(pm.request.body.raw);\r",
+                  "const target = pm.response.json();\r",
+                  "pm.test(\"Response must contain fields: id, email, phone, user\", function () {\r",
+                  "pm.expect(target).to.have.property('id');\r",
+                  "pm.expect(target).to.have.property('email');\r",
+                  "pm.expect(target).to.have.property('phone');\r",
+                  "pm.expect(target).to.have.property('user');\r",
+                  "});\r",
+                  "pm.test(\"Response data should be eql request data\", function () {\r",
+                  "var jsonData = pm.response.json();\r",
+                  "pm.expect(target.id).to.eql(1);\r",
+                  "pm.expect(jsonData.email).to.eql('loloHaha@inbox.ru');\r",
+                  "pm.expect(jsonData.phone).to.eql('94445788985');\r",
+                  "pm.expect(jsonData.user.id).to.eql(6);\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Basic YWRtaW46MTIz"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"loloHaha@inbox.ru\",\n  \"phone\": \"94445788985\",\n  \"user\": \"6\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/info/:infoId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "info",
+                ":infoId"
+              ],
+              "variable": [
+                {
+                  "key": "infoId",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "UpdateSixthUser",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Response must contain status code 200 and json data\", function () {\r",
+                  "pm.response.to.be.status(200);\r",
+                  "pm.response.to.be.withBody;\r",
+                  "pm.response.to.be.json;\r",
+                  "});\r",
+                  "const source = JSON.parse(pm.request.body.raw);\r",
+                  "const target = pm.response.json();\r",
+                  "pm.test(\"Response must contain fields: id, name, lastName, surName, birthday, image\", function () {\r",
+                  "pm.expect(target).to.have.property('id');\r",
+                  "pm.expect(target).to.have.property('name');\r",
+                  "pm.expect(target).to.have.property('lastName');\r",
+                  "pm.expect(target).to.have.property('surName');\r",
+                  "pm.expect(target).to.have.property('birthday');\r",
+                  "pm.expect(target).to.have.property('image');\r",
+                  "});\r",
+                  "pm.test(\"Response data should be eql request data\", function () {\r",
+                  "var jsonData = pm.response.json();\r",
+                  "pm.expect(target.id).to.eql(6);\r",
+                  "pm.expect(jsonData.name).to.eql('Ken');\r",
+                  "pm.expect(jsonData.lastName).to.eql('Lower');\r",
+                  "pm.expect(jsonData.surName).to.eql('Kristian');\r",
+                  "pm.expect(jsonData.birthday).to.eql('1984-05-24');\r",
+                  "pm.expect(jsonData.image.id).to.eql(5);\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Basic YWRtaW46MTIz"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Ken\",\n  \"lastName\": \"Lower\",\n  \"surName\": \"Kristian\",\n  \"birthday\": \"1984-05-24\", \n  \"image\": \"5\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/users/:userId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users",
+                ":userId"
+              ],
+              "variable": [
+                {
+                  "key": "userId",
+                  "value": "6"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GetContactInfo",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Response must contain status code 200 and json data\", function () {\r",
+                  "pm.response.to.be.status(200);\r",
+                  "pm.response.to.be.withBody;\r",
+                  "pm.response.to.be.json;\r",
+                  "});\r",
+                  "const target = pm.response.json();\r",
+                  "pm.test(\"Response must contain fields: id, email, phone, user\", function () {\r",
+                  "pm.expect(target).to.have.property('id');\r",
+                  "pm.expect(target).to.have.property('email');\r",
+                  "pm.expect(target).to.have.property('phone');\r",
+                  "pm.expect(target).to.have.property('user');\r",
+                  "});\r",
+                  "pm.test(\"Response data should be eql request data\", function () {\r",
+                  "    var jsonData = pm.response.json();\r",
+                  "    pm.expect(jsonData.id).to.eql(1);\r",
+                  "    pm.expect(jsonData.email).to.eql('loloHaha@inbox.ru');\r",
+                  "    pm.expect(jsonData.phone).to.eql('94445788985');\r",
+                  "    pm.expect(jsonData.user.id).to.eql(6);\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*"
+              },
+              {
+                "key": "Authorization",
+                "value": "Basic YWRtaW46MTIz"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/info/:infoId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "info",
+                ":infoId"
+              ],
+              "variable": [
+                {
+                  "key": "infoId",
+                  "value": "1",
+                  "description": "(Required) "
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "UpdateInfoWithInfoNotFound",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Response must contain status code 404\", function () {\r",
+                  "pm.response.to.be.status(404);\r",
+                  "pm.response.to.be.withBody;\r",
+                  "pm.response.to.be.json;\r",
+                  "});\r",
+                  "const source = JSON.parse(pm.request.body.raw);\r",
+                  "const target = pm.response.json();\r",
+                  "pm.test(\"Response must contain fields: message\", function () {\r",
+                  "pm.expect(target).to.have.property('message');\r",
+                  "});\r",
+                  "pm.test(\"Response data should be eql exception data\", function () {\r",
+                  "var jsonData = pm.response.json();\r",
+                  "pm.expect(jsonData.message).to.eql('Contact with id 99 not found');\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Basic YWRtaW46MTIz"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"loloHaha@inbox.ru\",\n  \"phone\": \"94445788985\",\n  \"user\": \"3\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/info/:infoId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "info",
+                ":infoId"
+              ],
+              "variable": [
+                {
+                  "key": "infoId",
+                  "value": "99"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "UpdateInfoWithUserNotFound",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Response must contain status code 404\", function () {\r",
+                  "pm.response.to.be.status(404);\r",
+                  "pm.response.to.be.withBody;\r",
+                  "pm.response.to.be.json;\r",
+                  "});\r",
+                  "const source = JSON.parse(pm.request.body.raw);\r",
+                  "const target = pm.response.json();\r",
+                  "pm.test(\"Response must contain fields: message\", function () {\r",
+                  "pm.expect(target).to.have.property('message');\r",
+                  "});\r",
+                  "pm.test(\"Response data should be eql exception data\", function () {\r",
+                  "var jsonData = pm.response.json();\r",
+                  "pm.expect(jsonData.message).to.eql('User with id 99 not found');\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Basic YWRtaW46MTIz"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"loloHaha@inbox.ru\",\n  \"phone\": \"94445788985\",\n  \"user\": \"99\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/info/:infoId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "info",
+                ":infoId"
+              ],
+              "variable": [
+                {
+                  "key": "infoId",
+                  "value": "3"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DeleteUserInUse",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Response must contain status code 409\", function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([409]);",
+                  "});",
+                  "const target = pm.response.json();\r",
+                  "pm.test(\"Response must contain fields: message\", function () {\r",
+                  "pm.expect(target).to.have.property('message');\r",
+                  "});\r",
+                  "pm.test(\"Response data should be eql exception data\", function () {\r",
+                  "var jsonData = pm.response.json();\r",
+                  "pm.expect(jsonData.message).to.eql('User with id 6 still in use');\r",
+                  "});",
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/users/:userId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users",
+                ":userId"
+              ],
+              "variable": [
+                {
+                  "key": "userId",
+                  "value": "6"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DeleteContactInfoWithUser",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Response must contain status code 204\", function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([204]);",
+                  "});",
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/info/:infoId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "info",
+                ":infoId"
+              ],
+              "variable": [
+                {
+                  "key": "infoId",
+                  "value": "3"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GetAllContactInfoAfterUpdate",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Response must contain code status 200 and json data\", function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200]);",
+                  "});",
+                  "pm.test(\"Response data should be eql file data\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.length, 'info count in total').to.eql(2);",
+                  "",
+                  "    pm.expect(jsonData[0].id, 'result[0]: \"id\" field').to.eql(1);",
+                  "    pm.expect(jsonData[0].email, 'result[0]: \"email\" field').to.eql('loloHaha@inbox.ru');",
+                  "    pm.expect(jsonData[0].phone, 'result[0]: \"phone\" field').to.eql('94445788985');",
+                  "    pm.expect(jsonData[0].user.id, 'result[0]: \"user.id\" field').to.eql(6);",
+                  "",
+                  "    pm.expect(jsonData[1].id, 'result[1]: \"id\" field').to.eql(4);",
+                  "    pm.expect(jsonData[1].email, 'result[1]: \"email\" field').to.eql('kroc1344@live.com');",
+                  "    pm.expect(jsonData[1].phone, 'result[1]: \"phone\" field').to.eql('+43232111333');",
+                  "    pm.expect(jsonData[1].user.id, 'result[1]: \"user.id\" field').to.eql(3);",
+                  "",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Basic YWRtaW46MTIz"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/info",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "info"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080",
+      "type": "string"
+    },
+    {
+      "key": "fileName1",
+      "value": "resources/images/TestImage1.jpg",
+      "type": "string"
+    },
+    {
+      "key": "fileName2",
+      "value": "resources/images/TestImage2.jpg",
+      "type": "string"
+    },
+    {
+      "key": "fileName3",
+      "value": "resources/images/TestImage3.jpg",
+      "type": "string"
+    },
+    {
+      "key": "fileName4",
+      "value": "resources/images/TestImage4.jpg",
+      "type": "string"
+    }
+  ]
+}

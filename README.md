@@ -50,4 +50,5 @@ IntellijIdea
 7. test app with postman tests collection in postman package:
    - set up postman working directory for using image files from resources/images automatically
    - you can use any others files you want but before start collection you need add this files to POST image requests (body, form-data)
+   - also you can check view you image from browser from methods GET link parameter (..../images/view/imageId)
    - use tests in a given sequence

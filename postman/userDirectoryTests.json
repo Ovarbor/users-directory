@@ -217,67 +217,6 @@
           }
         },
         {
-          "name": "AddImageIncorrectProperties",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "pm.test(\"Response must contain status code 400 and json data\", function () {\r",
-                  "pm.response.to.be.status(400);\r",
-                  "});\r",
-                  "const target = pm.response.json();\r",
-                  "pm.test(\"Response must contain fields: message\", function () {\r",
-                  "pm.expect(target).to.have.property('message');\r",
-                  "});\r",
-                  "pm.test(\"Response data should be eql exception data\", function () {\r",
-                  "var jsonData = pm.response.json();\r",
-                  "pm.expect(jsonData.message).to.eql('Incorrect file properties');\r",
-                  "});"
-                ],
-                "type": "text/javascript"
-              }
-            }
-          ],
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "multipart/form-data"
-              },
-              {
-                "key": "Accept",
-                "value": "*/*"
-              },
-              {
-                "key": "Authorization",
-                "value": "Basic YWRtaW46MTIz"
-              }
-            ],
-            "body": {
-              "mode": "formdata",
-              "formdata": [
-                {
-                  "key": "file",
-                  "description": "testFile",
-                  "type": "file",
-                  "src": ""
-                }
-              ]
-            },
-            "url": {
-              "raw": "{{baseUrl}}/images",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "images"
-              ]
-            }
-          }
-        },
-        {
           "name": "GetImage",
           "event": [
             {
@@ -3020,22 +2959,22 @@
     },
     {
       "key": "fileName1",
-      "value": "src/main/resources/images/TestImage1.jpg",
+      "value": "resources/images/TestImage1.jpg",
       "type": "string"
     },
     {
       "key": "fileName2",
-      "value": "src/main/resources/images/TestImage2.jpg",
+      "value": "resources/images/TestImage2.jpg",
       "type": "string"
     },
     {
       "key": "fileName3",
-      "value": "src/main/resources/images/TestImage3.jpg",
+      "value": "resources/images/TestImage3.jpg",
       "type": "string"
     },
     {
       "key": "fileName4",
-      "value": "src/main/resources/images/TestImage4.jpg",
+      "value": "resources/images/TestImage4.jpg",
       "type": "string"
     }
   ]

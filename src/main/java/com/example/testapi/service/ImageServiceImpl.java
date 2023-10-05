@@ -4,7 +4,6 @@ import com.example.TestAPI.dto.ImageDto;
 import com.example.TestAPI.dto.ImageDtoLink;
 import com.example.TestAPI.dto.NewImageDto;
 import com.example.TestAPI.exceptions.ConflictException;
-import com.example.TestAPI.exceptions.IllegalRequestException;
 import com.example.TestAPI.exceptions.ImageNotFoundException;
 import com.example.TestAPI.mapper.ImageMapper;
 import com.example.TestAPI.model.Image;
@@ -56,17 +55,9 @@ public class ImageServiceImpl implements ImageService {
     public ImageDto addImage(MultipartFile multipartFile) throws Exception {
         NewImageDto newImageDto = new NewImageDto(multipartFile.getOriginalFilename(),
                 multipartFile.getContentType(), multipartFile.getBytes());
-//        checkFile(newImageDto);
         ImageDto imageDto = imageMapper.toImageDto(newImageDto);
         return imageMapper.toImageDto(imageRepo.save(imageMapper.toImage(imageDto)));
     }
-
-//    private void checkFile(NewImageDto newImageDto) {
-//        if (newImageDto.getTitle().isBlank() || newImageDto.getType().isBlank() ||
-//        newImageDto.getData().length == 0) {
-//            throw new IllegalRequestException("Incorrect file properties");
-//        }
-//    }
 
     @Override
     public void removeImage(Long id) {

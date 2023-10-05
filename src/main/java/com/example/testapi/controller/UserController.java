@@ -1,9 +1,9 @@
-package com.example.TestAPI.controller;
-import com.example.TestAPI.dto.NewUserDto;
-import com.example.TestAPI.dto.UserDto;
-import com.example.TestAPI.dto.UserDtoGet;
-import com.example.TestAPI.dto.UserDtoUpdate;
-import com.example.TestAPI.service.UserService;
+package com.example.testapi.controller;
+import com.example.testapi.dto.NewUserDto;
+import com.example.testapi.dto.UserDto;
+import com.example.testapi.dto.UserDtoGet;
+import com.example.testapi.dto.UserDtoUpdate;
+import com.example.testapi.service.UserService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;

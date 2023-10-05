@@ -1,5 +1,5 @@
-package com.example.TestAPI.dto;
-import com.example.TestAPI.model.User;
+package com.example.testapi.dto;
+import com.example.testapi.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

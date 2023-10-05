@@ -1,8 +1,8 @@
-package com.example.TestAPI.mapper;
-import com.example.TestAPI.dto.ImageDto;
-import com.example.TestAPI.dto.ImageDtoLink;
-import com.example.TestAPI.dto.NewImageDto;
-import com.example.TestAPI.model.Image;
+package com.example.testapi.mapper;
+import com.example.testapi.dto.ImageDto;
+import com.example.testapi.dto.ImageDtoLink;
+import com.example.testapi.dto.NewImageDto;
+import com.example.testapi.model.Image;
 import org.mapstruct.Mapper;
 
 import java.util.List;

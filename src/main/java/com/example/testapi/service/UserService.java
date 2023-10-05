@@ -1,8 +1,8 @@
-package com.example.TestAPI.service;
-import com.example.TestAPI.dto.NewUserDto;
-import com.example.TestAPI.dto.UserDto;
-import com.example.TestAPI.dto.UserDtoGet;
-import com.example.TestAPI.dto.UserDtoUpdate;
+package com.example.testapi.service;
+import com.example.testapi.dto.NewUserDto;
+import com.example.testapi.dto.UserDto;
+import com.example.testapi.dto.UserDtoGet;
+import com.example.testapi.dto.UserDtoUpdate;
 import org.springframework.stereotype.Service;
 import java.util.List;
 

@@ -1,5 +1,5 @@
-package com.example.TestAPI.repo;
-import com.example.TestAPI.model.ContactInfo;
+package com.example.testapi.repo;
+import com.example.testapi.model.ContactInfo;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 

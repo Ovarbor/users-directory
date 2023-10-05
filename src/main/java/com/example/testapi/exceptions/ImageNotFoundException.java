@@ -1,4 +1,4 @@
-package com.example.TestAPI.exceptions;
+package com.example.testapi.exceptions;
 
 public class ImageNotFoundException extends RuntimeException{
     public ImageNotFoundException(String message) {

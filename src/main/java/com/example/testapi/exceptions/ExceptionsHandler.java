@@ -1,4 +1,4 @@
-package com.example.TestAPI.exceptions;
+package com.example.testapi.exceptions;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

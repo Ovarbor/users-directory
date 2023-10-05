@@ -1,9 +1,9 @@
-package com.example.TestAPI.controller;
-import com.example.TestAPI.dto.ContactInfoDto;
-import com.example.TestAPI.dto.ContactInfoDtoGet;
-import com.example.TestAPI.dto.ContactInfoDtoUpdate;
-import com.example.TestAPI.dto.NewContactInfoDto;
-import com.example.TestAPI.service.ContactInfoService;
+package com.example.testapi.controller;
+import com.example.testapi.dto.ContactInfoDto;
+import com.example.testapi.dto.ContactInfoDtoGet;
+import com.example.testapi.dto.ContactInfoDtoUpdate;
+import com.example.testapi.dto.NewContactInfoDto;
+import com.example.testapi.service.ContactInfoService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;

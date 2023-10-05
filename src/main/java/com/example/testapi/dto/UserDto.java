@@ -1,5 +1,5 @@
-package com.example.TestAPI.dto;
-import com.example.TestAPI.model.Image;
+package com.example.testapi.dto;
+import com.example.testapi.model.Image;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

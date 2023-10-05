@@ -1,7 +1,7 @@
-package com.example.TestAPI.controller;
-import com.example.TestAPI.dto.ImageDto;
-import com.example.TestAPI.dto.ImageDtoLink;
-import com.example.TestAPI.service.ImageService;
+package com.example.testapi.controller;
+import com.example.testapi.dto.ImageDto;
+import com.example.testapi.dto.ImageDtoLink;
+import com.example.testapi.service.ImageService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.ByteArrayResource;

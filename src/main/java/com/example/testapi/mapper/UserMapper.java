@@ -1,8 +1,8 @@
-package com.example.TestAPI.mapper;
-import com.example.TestAPI.dto.NewUserDto;
-import com.example.TestAPI.dto.UserDto;
-import com.example.TestAPI.dto.UserDtoGet;
-import com.example.TestAPI.model.User;
+package com.example.testapi.mapper;
+import com.example.testapi.dto.NewUserDto;
+import com.example.testapi.dto.UserDto;
+import com.example.testapi.dto.UserDtoGet;
+import com.example.testapi.model.User;
 import org.mapstruct.Mapper;
 import java.util.List;
 

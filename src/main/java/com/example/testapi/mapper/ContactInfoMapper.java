@@ -1,8 +1,8 @@
-package com.example.TestAPI.mapper;
-import com.example.TestAPI.dto.ContactInfoDto;
-import com.example.TestAPI.dto.ContactInfoDtoGet;
-import com.example.TestAPI.dto.NewContactInfoDto;
-import com.example.TestAPI.model.ContactInfo;
+package com.example.testapi.mapper;
+import com.example.testapi.dto.ContactInfoDto;
+import com.example.testapi.dto.ContactInfoDtoGet;
+import com.example.testapi.dto.NewContactInfoDto;
+import com.example.testapi.model.ContactInfo;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;

@@ -1,4 +1,4 @@
-package com.example.TestAPI.Utils;
+package com.example.testapi.Utils;
 
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 

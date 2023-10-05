@@ -1,8 +1,8 @@
-package com.example.TestAPI.service;
-import com.example.TestAPI.dto.ContactInfoDto;
-import com.example.TestAPI.dto.ContactInfoDtoGet;
-import com.example.TestAPI.dto.ContactInfoDtoUpdate;
-import com.example.TestAPI.dto.NewContactInfoDto;
+package com.example.testapi.service;
+import com.example.testapi.dto.ContactInfoDto;
+import com.example.testapi.dto.ContactInfoDtoGet;
+import com.example.testapi.dto.ContactInfoDtoUpdate;
+import com.example.testapi.dto.NewContactInfoDto;
 import org.springframework.stereotype.Service;
 import java.util.List;
 

@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  users-directory:
+    build: .
+    container_name: users-directory
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    restart: on-failure
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/testAPI
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+
+  db:
+    image: postgres:13.7-alpine
+    container_name: db
+    ports:
+      - "5432:5432"
+    restart: on-failure
+    volumes:
+      - /var/lib/postgresql/data/
+    environment:
+      - POSTGRES_DB=testAPI
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}

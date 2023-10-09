@@ -35,6 +35,9 @@ Also, as a feature of this project you can add images to users.
 <a href="https://mapstruct.org/">
   <img src="resources/logos/mapstruct.png" title="Mapstruct" alt="Mapstruct" width="80" height="40"/>&nbsp;
 </a>
+<a href="https://www.docker.com/">
+  <img src="resources/logos/Docker.png" title="Mapstruct" alt="Mapstruct" width="80" height="40"/>&nbsp;
+</a>
 
 ### System requirements:
 JDK 11 amazon corretto  
@@ -44,9 +47,9 @@ IntellijIdea
 1. Download zip-file
 2. Unpack zip-file
 3. Open app in IntellijIdea
-4. mvn clean package
-5. run app
-6. use you PostgresDB properties DB_USERNAME; DB_PASSWORD
+4. Use you PostgresDB properties in config and docker-compose.yml, POSTGRES_USER; POSTGRES_PASSWORD
+5. mvn clean package
+6. run app from main class or from docker-compose.yml
 7. test app with postman tests collection in postman package:
    - set up postman working directory for using image files from resources/images automatically
    - you can use any others files you want but before start collection you need add this files to POST image requests (body, form-data)

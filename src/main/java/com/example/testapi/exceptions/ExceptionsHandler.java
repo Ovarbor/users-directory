@@ -78,6 +78,15 @@ public class ExceptionsHandler {
                 .body(new ErrorMessage(e.getMessage()));
     }
 
+    @ExceptionHandler(IllegalArgumentException.class)
+    @ResponseStatus(value = HttpStatus.FORBIDDEN)
+    public ResponseEntity<Object> handleIllegalArgumentException(final IllegalArgumentException e) {
+        log.warn(e.getMessage());
+        return ResponseEntity
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(new ErrorMessage(e.getMessage()));
+    }
+
     @ExceptionHandler(ImageNotFoundException.class)
     public ResponseEntity<ErrorMessage> imageNotFoundException(ImageNotFoundException exception) {
         log.warn(exception.getMessage(), exception);

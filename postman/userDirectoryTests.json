@@ -338,6 +338,192 @@
           "response": []
         },
         {
+          "name": "GetAllImagesWith from = 0 & size = 0",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 500\", function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([500,400]);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Basic YWRtaW46MTIz"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/images?from=0&size=0",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "images"
+              ],
+              "query": [
+                {
+                  "key": "from",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "0"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GetAllImagesWith from = -1 & size = 10",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 500\", function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([500,400]);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Basic YWRtaW46MTIz"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/images?from=-1&size=10",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "images"
+              ],
+              "query": [
+                {
+                  "key": "from",
+                  "value": "-1"
+                },
+                {
+                  "key": "size",
+                  "value": "10"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GetAllImagesWith from = 1 & size = 2",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Response must contain code status 200 and json data\", function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200]);",
+                  "});",
+                  "pm.test(\"Response data should be eql file data\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.length, 'images count in total').to.eql(1);",
+                  "",
+                  "    pm.expect(jsonData[0].id, 'result[0]: \"id\" field').to.eql(3);",
+                  "    pm.expect(jsonData[0].title, 'result[0]: \"title\" field').to.not.be.null;",
+                  "    pm.expect(jsonData[0].type, 'result[0]: \"type\" field').to.not.be.null;",
+                  "    pm.expect(jsonData[0].link, 'result[0]: \"link\" field').to.not.be.null;",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Basic YWRtaW46MTIz"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/images?from=1&size=2",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "images"
+              ],
+              "query": [
+                {
+                  "key": "from",
+                  "value": "1"
+                },
+                {
+                  "key": "size",
+                  "value": "2"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
           "name": "DeleteImage",
           "event": [
             {
@@ -560,6 +746,79 @@
               ],
               "path": [
                 "images"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GetAllImagesWith from = 0 & size = 2",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Response must contain code status 200 and json data\", function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200]);",
+                  "});",
+                  "pm.test(\"Response data should be eql file data\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.length, 'images count in total').to.eql(2);",
+                  "",
+                  "    pm.expect(jsonData[0].id, 'result[0]: \"id\" field').to.eql(1);",
+                  "    pm.expect(jsonData[0].title, 'result[0]: \"title\" field').to.not.be.null;",
+                  "    pm.expect(jsonData[0].type, 'result[0]: \"type\" field').to.not.be.null;",
+                  "    pm.expect(jsonData[0].link, 'result[0]: \"link\" field').to.not.be.null;",
+                  "",
+                  "    pm.expect(jsonData[1].id, 'result[1]: \"id\" field').to.eql(3);",
+                  "    pm.expect(jsonData[1].title, 'result[1]: \"title\" field').to.not.be.null;",
+                  "    pm.expect(jsonData[1].type, 'result[1]: \"type\" field').to.not.be.null;",
+                  "    pm.expect(jsonData[1].link, 'result[1]: \"link\" field').to.not.be.null;",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Basic YWRtaW46MTIz"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/images?from=0&size=2",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "images"
+              ],
+              "query": [
+                {
+                  "key": "from",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "2"
+                }
               ]
             }
           },
@@ -902,6 +1161,124 @@
               ],
               "path": [
                 "users"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GetAllUsersWith from = 0 & size = 0",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 500\", function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([500,400]);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Basic YWRtaW46MTIz"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/users?from=0&size=0",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users"
+              ],
+              "query": [
+                {
+                  "key": "from",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "0"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GetAllUsersWith from = -1 & size = 10",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 500\", function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([500,400]);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Basic YWRtaW46MTIz"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/users?from=-1&size=10",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users"
+              ],
+              "query": [
+                {
+                  "key": "from",
+                  "value": "-1"
+                },
+                {
+                  "key": "size",
+                  "value": "10"
+                }
               ]
             }
           },
@@ -2144,6 +2521,124 @@
           "response": []
         },
         {
+          "name": "GetAllContactInfoWith from = 0 & size = 0",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 500\", function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([500,400]);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Basic YWRtaW46MTIz"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/info?from=0&size=0",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "info"
+              ],
+              "query": [
+                {
+                  "key": "from",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "0"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GetAllContactInfoWith from = -1 & size = 10",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 500\", function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([500,400]);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Basic YWRtaW46MTIz"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/info?from=-1&size=10",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "info"
+              ],
+              "query": [
+                {
+                  "key": "from",
+                  "value": "-1"
+                },
+                {
+                  "key": "size",
+                  "value": "10"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
           "name": "DeleteContactInfo",
           "event": [
             {
@@ -2664,6 +3159,84 @@
           }
         },
         {
+          "name": "GetAllUsersWith from = 1 & size = 2",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Response must contain code status 200 and json data\", function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200]);",
+                  "});",
+                  "pm.test(\"Response data should be eql file data\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.length, 'users count in total').to.eql(2);",
+                  "",
+                  "    pm.expect(jsonData[0].id, 'result[0]: \"id\" field').to.eql(5);",
+                  "    pm.expect(jsonData[0].name, 'result[0]: \"name\" field').to.eql('Mike');",
+                  "    pm.expect(jsonData[0].lastName, 'result[0]: \"lastName\" field').to.eql('Scaly');",
+                  "    pm.expect(jsonData[0].surName, 'result[0]: \"surName\" field').to.eql('Bobbins');",
+                  "    pm.expect(jsonData[0].birthday, 'result[0]: \"birthday\" field').to.eql('1944-03-01');",
+                  "    pm.expect(jsonData[0].image.id, 'result[0]: \"image.id\" field').to.eql(1);",
+                  "",
+                  "    pm.expect(jsonData[1].id, 'result[1]: \"id\" field').to.eql(6);",
+                  "    pm.expect(jsonData[1].name, 'result[1]: \"name\" field').to.eql('Ken');",
+                  "    pm.expect(jsonData[1].lastName, 'result[1]: \"lastName\" field').to.eql('Lower');",
+                  "    pm.expect(jsonData[1].surName, 'result[1]: \"surName\" field').to.eql('Kristian');",
+                  "    pm.expect(jsonData[1].birthday, 'result[1]: \"birthday\" field').to.eql('1984-05-24');",
+                  "    pm.expect(jsonData[1].image.id, 'result[1]: \"image.id\" field').to.eql(5);",
+                  "",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Basic YWRtaW46MTIz"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/users?from=1&size=2",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users"
+              ],
+              "query": [
+                {
+                  "key": "from",
+                  "value": "1"
+                },
+                {
+                  "key": "size",
+                  "value": "2"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
           "name": "UpdateInfoWithInfoNotFound",
           "event": [
             {
@@ -2791,6 +3364,80 @@
                 {
                   "key": "infoId",
                   "value": "3"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GetAllContactInfoWith from = 0 & size = 2",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Response must contain code status 200 and json data\", function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200]);",
+                  "});",
+                  "pm.test(\"Response data should be eql file data\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.length, 'info count in total').to.eql(2);",
+                  "",
+                  "    pm.expect(jsonData[0].id, 'result[0]: \"id\" field').to.eql(1);",
+                  "    pm.expect(jsonData[0].email, 'result[0]: \"email\" field').to.eql('loloHaha@inbox.ru');",
+                  "    pm.expect(jsonData[0].phone, 'result[0]: \"phone\" field').to.eql('94445788985');",
+                  "    pm.expect(jsonData[0].user.id, 'result[0]: \"user.id\" field').to.eql(6);",
+                  "",
+                  "    pm.expect(jsonData[1].id, 'result[1]: \"id\" field').to.eql(3);",
+                  "    pm.expect(jsonData[1].email, 'result[1]: \"email\" field').to.eql('vvvplumM@yahoo.com');",
+                  "    pm.expect(jsonData[1].phone, 'result[1]: \"phone\" field').to.eql('+79994445533');",
+                  "    pm.expect(jsonData[1].user.id, 'result[1]: \"user.id\" field').to.eql(4);",
+                  "",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Basic YWRtaW46MTIz"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/info?from=0&size=2",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "info"
+              ],
+              "query": [
+                {
+                  "key": "from",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "2"
                 }
               ]
             }

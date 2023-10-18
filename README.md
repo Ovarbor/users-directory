@@ -3,9 +3,12 @@
 Users-Directory contains various tools for working with users data.
 
 ### Functional and structure:
-Users-Directory is REST application with one module, use PostgreSQL DB, that allows you to add, update, remove 
+Users-Directory is REST application, use PostgreSQL DB, that allows you to add, update, remove 
 data users from DB with parameters such as name, lastName, etc., also you can add and update contact information 
-about users and save it in DB. Also, as a feature of this project you can add images to users.
+about users and save it in DB. Also, as a feature of this project you can add images to users. In project realized two
+levels of authentication for ADMIN and USER, with spring-boot security framework. ADMIN access lvl is built into
+the application and works with GET, DELETE endpoints. USER lvl access for POST, GET/id, PATCH endpoints and
+working after you create user data.
 
 Structure:
 
@@ -47,7 +50,11 @@ IntellijIdea
 1. Download zip-file
 2. Unpack zip-file
 3. Open app in IntellijIdea
-4. Use you PostgresDB properties in config and docker-compose.yml, POSTGRES_USER; POSTGRES_PASSWORD
+4. Use you PostgresDB properties in config and docker-compose.yml:
+   - POSTGRES_USER; 
+   - POSTGRES_PASSWORD, 
+   - ADMIN_NAME, 
+   - ADMIN_PASSWORD
 5. mvn clean package
 6. run app from main class or from docker-compose.yml
 7. test app with postman tests collection in postman package:

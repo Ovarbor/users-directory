@@ -1,16 +1,18 @@
 version: '3.8'
 
 services:
-  users-directory:
-    build: .
-    container_name: users-directory
+  main-service:
+    build: ./main-service
+    container_name: main-service
     ports:
       - "8080:8080"
     depends_on:
       - db
     restart: on-failure
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/testAPI
+      - ADMIN_NAME=${ADMIN_NAME}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD}
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/msdb
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
 
@@ -23,6 +25,6 @@ services:
     volumes:
       - /var/lib/postgresql/data/
     environment:
-      - POSTGRES_DB=testAPI
+      - POSTGRES_DB=msdb
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
